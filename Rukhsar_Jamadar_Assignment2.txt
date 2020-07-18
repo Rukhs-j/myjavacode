@@ -1,0 +1,862 @@
+1.
+Create a class named 'Student' with String variable 'name' and integer variable 'roll_no'. Assign the value of roll_no as '2' and that of name as "John" by creating an object of the class Student.
+code:
+public class Student1
+{
+  String name;
+  int roll_no;
+  public static void main(String args[])
+  {
+     
+     Student1 s=new Student1();
+     s.name="john";
+     s.roll_no=2;
+     System.out.println("name of student is"+s.name);
+     System.out.println("roll no of student is"+s.roll_no);
+     
+     
+      
+    
+  }
+
+}
+*/D:\jinter>javac Student1.java
+
+D:\jinter>java Student1
+name of student isjohn
+roll no of student is2 */
+
+2.
+Assign and print the roll number, phone number and address of two students having names "Sam" and "John" respectively by creating two objects of class 'Student'.
+code:
+public class Student2
+{
+
+   int roll_no;
+   double phone_no;
+   String address,name;
+   public static void main(String args[])
+   {
+      Student2 s1=new Student2();
+      s1.name="sam";
+      s1.roll_no=1;
+      s1.phone_no=1234567891;
+      s1.address="shau chok latur";
+      Student2 s2=new Student2();
+      s2.name="john";
+      s2.roll_no=2;
+      s2.phone_no=987654321;
+      s2.address="ring road latur";
+
+      System.out.println("Information of first student "+s1.name+" "+s1.roll_no+" "+s1.phone_no+" "+s1.address);
+      
+      System.out.println("Information of second student "+s2.name+" "+s2.roll_no+" "+s2.phone_no+" "+s2.address);
+
+   }
+}
+output:
+D:\jinter>javac Student2.java
+
+D:\jinter>java Student2
+Information of first student sam 1 1.234567891E9 shau chok latur
+Information of second student john 2 9.87654321E8 ring road latur
+
+
+
+3.
+Write a program to print the area and perimeter of a triangle having sides of 3, 4 and 5 units by creating a class named 'Triangle' without any parameter in its constructor.
+import java.lang.*;
+public class Triangle
+{    
+     int x=3,y=4,z=5;
+     double perimeter,semi_peri,area;
+     public static void main(String args[])
+     {
+         Triangle t=new Triangle();
+         t.perimeter=t.x+t.y+t.z;
+         System.out.println("perimeter of triangle="+t.perimeter);
+         t.semi_peri=t.perimeter/2;
+         t.area=Math.sqrt(t.semi_peri*(t.semi_peri-t.x)+(t.semi_peri-t.y)+(t.semi_peri-t.z));
+         System.out.println("Area of triangle="+t.area);
+         
+        
+     }
+ 
+}
+output:
+D:\jinter>javac Triangle.java
+
+D:\jinter>java Triangle
+perimeter of triangle=12.0
+Area of triangle=4.58257569495584
+
+4.
+Write a program to print the area and perimeter of a triangle having sides of 3, 4 and 5 units by creating a class named 'Triangle' with constructor having the three sides as its parameters.
+package jintership;
+
+public class Triangle1 {
+	
+      int a,b,c;
+      double s,peri,area;
+      Triangle1(int s1,int s2,int s3)
+      {
+        a=s1;
+        b=s2;
+        c=s3;
+        peri=s1+s2+s3;
+        s=peri/2;
+        area=Math.sqrt(s*(s-a)+(s-b)+(s-c));
+        
+      }
+      
+
+}
+package jintership;
+
+public class Triangle {
+    
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      Triangle1 t=new Triangle1(3,4,5);
+      System.out.println("the perimeter of triangle="+t.peri);
+      System.out.println("the semi perimeter of triangle="+t.s);
+      System.out.println("the area of triangle="+t.area);
+	}
+
+}
+output:
+the perimeter of triangle=12.0
+the semi perimeter of triangle=6.0
+the area of triangle=4.58257569495584
+
+
+5.
+Write a program to print the area of two rectangles having sides (4,5) and (5,8) respectively by creating a class named 'Rectangle' with a method named 'Area' which returns the area and length and breadth passed as parameters to its constructor.
+package jintership;
+
+public class Rectangle {
+	int area(int l,int b)
+	{
+		int area=l*b;
+		return area;
+	}
+
+}
+package jintership;
+
+public class Rectangle1 {
+
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+          Rectangle r1=new Rectangle();
+          Rectangle r2=new Rectangle();
+          System.out.println("Area of first Rectangle="+r1.area(4,5));
+          System.out.println("Area of second Rectangle="+r2.area(5,8));
+	}
+
+}
+output:
+Area of first Rectangle=20
+Area of first Rectangle=40
+
+6.
+Write a program to print the area of a rectangle by creating a class named 'Area' having two methods. First method named as 'setDim' takes length and breadth of rectangle as parameters and the second method named as 'getArea' returns the area of the rectangle. Length and breadth of rectangle are entered through keyboard.
+package jintership;
+import java.util.*;
+
+public class Area {
+	
+		Scanner s=new Scanner(System.in);
+		int w,h;
+		
+		void setDim()
+		{
+			System.out.println("Enter the width");
+			w=s.nextInt();
+			System.out.println("Enter the height");
+			h=s.nextInt();
+		}
+		
+		int area()
+		{
+			int area=w*h;
+			return area;
+		}
+
+	}
+
+
+
+package jintership;
+
+public class Area_main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Area a=new Area();
+		a.setDim();
+		System.out.println("Area of rectangle="+a.area());
+
+
+	}
+
+}
+output:
+Enter the width
+ 4
+Enter the height
+6
+Area of rectangle=24
+
+7.
+Write a program to print the area of a rectangle by creating a class named 'Area' taking the values of its length and breadth as parameters of its constructor and having a method named 'returnArea' which returns the area of the rectangle. Length and breadth of rectangle are entered through keyboard.
+package jintership;
+import java.util.*;
+
+public class Area {
+	
+		Scanner s=new Scanner(System.in);
+		int w,h;
+		Area()
+		{
+			System.out.println("Enter the width");
+			w=s.nextInt();
+			System.out.println("Enter the height");
+			h=s.nextInt();
+		}
+		
+		int area()
+		{
+			int area=w*h;
+			return area;
+		}
+
+	}
+
+
+
+package jintership;
+
+public class Area_main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Area a=new Area();
+	    
+		System.out.println("Area of rectangle="+a.area());
+
+
+	}
+
+}
+output:
+Enter the width
+4
+Enter the height
+5
+Area of rectangle=20
+
+
+
+8.
+Print the average of three numbers entered by user by creating a class named 'Average' having a method to calculate and print the average.
+package jintership;
+import java.util.*;
+
+public class Average {
+	Scanner s=new Scanner(System.in);
+	int num1,num2,num3;
+	double avg;
+	void cal_avg()
+	{
+		System.out.println("Enter the first number:");
+		 num1=s.nextInt();
+		System.out.println("Enter the second  number:");
+		 num2=s.nextInt();
+		System.out.println("Enter the second number:");
+		 num3=s.nextInt();
+		 avg=(num1+num2+num3)/3;
+		 System.out.println("Average of three numbers="+avg);
+		
+	}
+
+}
+package jintership;
+
+public class Average1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Average a=new Average();
+		a.cal_avg();
+
+	}
+
+}
+output:
+Enter the first number:
+2
+Enter the second  number:
+4
+Enter the second number:
+3
+Average of three numbers=3.0
+
+
+9.
+Print the sum, difference and product of two complex numbers by creating a class named 'Complex' with separate methods 
+each operation whose real and imaginary parts are entered by user.
+package jintership;
+import java.util.*;
+
+public class complex 
+{    
+    Double r1,r2,i1,i2,real,img;
+	Scanner s=new Scanner(System.in);
+	
+	void get_real_img() {
+		   System.out.println("Enter the real part of first complex number");
+		    r1=s.nextDouble();
+		   System.out.println("Enter the imaginary part of first complex number");
+		    i1=s.nextDouble();
+		   System.out.println("Enter the real part of second complex number");
+		    r2=s.nextDouble();
+		   System.out.println("Enter the imaginary part of second complex number");
+		    i2=s.nextDouble();
+	}
+	
+	void show_number()
+	{
+		System.out.println("The first complex number is:"+r1+"+"+i1+"i");
+		System.out.println("The first complex number is:"+r2+"+"+i2+"i");
+
+	}
+	
+	void sum()
+	{
+	  	real=r1+r2;
+	  	img=i1+i2;
+	  	System.out.println("Addition of two complex number is="+real+"+"+img+"i");
+
+		
+		
+	}
+	void sub()
+	{
+	  	real=r1-r2;
+	  	img=i1-i2;
+	  	System.out.println("subtraction of two complex number is="+real+"+"+img+"i");
+
+		
+		
+	}
+	
+	void mul()
+	{
+	  	real=r1*r2;
+	  	img=i1*i2;
+	  	System.out.println("Multiplication of two complex number is="+real+"+"+img+"i");
+
+		
+		
+	}
+       
+        
+        
+}
+package jintership;
+
+public class complex1 {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		complex c1=new complex();
+		c1.get_real_img();
+		c1.show_number();
+		c1.sum();
+		c1.sub();
+		c1.mul();
+		
+		
+		
+		 
+		
+		
+        
+		
+
+	}
+
+}
+output:
+Enter the real part of first complex number
+5
+Enter the imaginary part of first complex number
+6
+Enter the real part of second complex number
+7
+Enter the imaginary part of second complex number
+8
+The first complex number is:5.0+6.0i
+The first complex number is:7.0+8.0i
+Addition of two complex number is=12.0+14.0i
+subtraction of two complex number is=-2.0+-2.0i
+Multiplication of two complex number is=35.0+48.0i
+
+
+
+10.
+Write a program that would print the information (name, year of joining, salary, address) of three employees by creating a class named 'Employee'. The output should be as follows:
+Name        Year of joining        Address
+Robert            1994                64C- WallsStreat
+Sam                2000                68D- WallsStreat
+John                1999                26B- WallsStreat
+package jintership;
+import java.util.*;
+
+
+public class Employee {
+
+	String name,address;
+	int year_of_joining, salary;
+	Scanner s=new Scanner(System.in);
+	
+	void get_info()
+	{
+		System.out.println("\nEnter the  name of employee");
+		name=s.nextLine();
+		System.out.println("\nEnter the Address of employee");
+		address=s.nextLine();
+		System.out.println("\nEnter the year of joinning ");
+		year_of_joining=s.nextInt();
+		System.out.println("\nEnter the salary of employee");
+		salary=s.nextInt();
+		
+		
+	}
+	
+	void display_info()
+	{
+		System.out.println(name+"  "+address+" "+year_of_joining+" "+salary+"  ");
+		
+	}
+	 
+	
+	
+}
+package jintership;
+
+public class Employee1 {
+
+	public static void main(String[] args) {
+		Employee[] e1 = new Employee[3];
+	    for(int i=0;i<=2;i++)
+	    {
+	    	e1[i]=new Employee();
+	    	e1[i].get_info();
+	    	
+	    	
+	    }
+	    System.out.println("name"+"  "+"address"+" "+"year_of_joining"+" "+"salary"+"  ");
+	    for(int i=0;i<=2;i++)
+	    {
+	    	
+	    	e1[i].display_info();
+	    }
+	    
+		}		
+}		
+		
+output:
+Enter the  name of employee
+Robert
+
+Enter the Address of employee
+64C-wallsStreat
+
+Enter the year of joinning 
+1994
+
+Enter the salary of employee
+20000
+
+Enter the  name of employee
+sam
+
+Enter the Address of employee
+68D-wallsStreat
+
+Enter the year of joinning 
+2000
+
+Enter the salary of employee
+40000
+
+Enter the  name of employee
+john
+
+Enter the Address of employee
+26B-wallsStreat
+
+Enter the year of joinning 
+1999
+
+Enter the salary of employee
+60000
+name  address year_of_joining salary  
+Robert  64C-wallsStreat 1994 20000  
+sam  68D-wallsStreat 2000 40000  
+john  26B-wallsStreat 1999 60000  
+
+
+11.
+Add two distances in inch-feet by creating a class named 'AddDistance'.
+package jintership;
+import java.util.*;
+
+
+public class Distance {
+	
+     int feet,inches;
+     void get_feet_inch()
+     {
+    	 Scanner s=new Scanner(System.in);
+    	 System.out.println("Enter the feet:");
+    	 feet=s.nextInt();
+    	 System.out.println("Enter the inch:");
+    	 inches=s.nextInt();
+    	 
+     }
+     void display()
+     {
+    	 System.out.println("feet"+feet+"\tinch"+inches);
+    	 
+     }
+     void addDistance(Distance d1,Distance d2)
+     {
+    	 inches=d1.inches+d2.inches;
+    	 feet=d1.feet+d2.feet+(inches/12);
+    	 inches=inches%12;
+    	 
+    	 
+     }
+}
+package jintership;
+
+public class Add_Distance {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      Distance d1=new  Distance();
+      Distance d2=new  Distance();
+      Distance d3=new  Distance();
+      System.out.println("Enter the first distance");
+      d1.get_feet_inch();
+      System.out.println("Enter the second distance");
+      d2.get_feet_inch();
+      d3.addDistance(d1, d2);
+      System.out.println("Total distance=");
+      d3.display();
+      
+	}
+
+}
+
+output:
+Enter the first distance
+Enter the feet:
+5
+Enter the inch:
+6
+Enter the second distance
+Enter the feet:
+5
+Enter the inch:
+6
+Total distance=
+feet11	inch0
+
+
+12.
+Write a program by creating an 'Employee' class having the following methods and print the final salary.
+1 - 'getInfo()' which takes the salary, number of hours of work per day of employee as parameter
+2 - 'AddSal()' which adds $10 to salary of the employee if it is less than $500.
+3 - 'AddWork()' which adds $5 to salary of employee if the number of hours of work per day is more than 6 hours.
+
+package jintership;
+
+
+public class Employe {
+
+	int salary=0;
+	int hour=0;
+	void get_info(int salary,int hour)
+	{
+		this.salary=salary;
+		this.hour=hour;
+	}
+	
+    void addsal()
+    {
+    	
+    	if(salary<500)
+    	{
+    		salary=salary+10;
+    		System.out.println("Salary is: "+salary+"$");
+    		
+    	}
+    }
+    void addwork()
+    {
+    	
+    	if(hour>6)
+    	{
+    		salary=salary+5;
+    		System.out.println("Salary is: "+salary+"$");	
+    	}
+    }
+}
+package jintership;
+
+import java.util.Scanner;
+
+public class Employe1 {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Employe e=new Employe();
+		Scanner s1=new Scanner(System.in);
+		System.out.println("Enter the salary");
+        int salary=s1.nextInt();
+        System.out.println("Enter the working hours");
+        int hour=s1.nextInt();
+        e.get_info(salary, hour);
+        e.addsal();
+        e.addwork();
+		
+       
+        
+        
+		  
+	}
+		
+}
+output:
+Enter the salary
+ 300
+Enter the working hours
+7
+Salary is: 310$
+Salary is: 315$
+
+
+13.
+Create a class called 'Matrix' containing constructor that initializes the number of rows and number of columns of a new Matrix object. The Matrix class has the following information:
+1 - number of rows of matrix
+2 - number of columns of matrix
+3 - elements of matrix in the form of 2D array
+import java.util.*;
+class Mymatrix{
+
+  public static void main(String args[])
+  {
+      int m,n;
+      Scanner sc =new Scanner(System.in);
+   
+     System.out.println("Enter number of rows and columns");
+     m=sc.nextInt();
+     n=sc.nextInt();
+     Matrix m1=new Matrix(m,n);
+     m1.set();
+     m1.show();
+  }
+}   
+  
+class Matrix{
+
+  int rows;
+  int columns;
+  
+  Matrix(int m,int n)
+  {
+ 
+    rows=m;
+    columns=n;
+  }
+    int [][] mat=new int[10][10];
+  
+
+   void set()
+  {
+      
+    System.out.println("Enter "+(rows*columns)+" Elements"); 
+    Scanner sc=new Scanner(System.in);
+   for(int i=0;i<rows;i++)
+   {
+  
+     for(int j=0;j<columns;j++)
+      {
+       mat [i][j]=sc.nextInt();
+      }
+    }
+ }
+
+void show()
+ {
+        for(int i=0;i<rows;i++)
+   {
+  
+     for(int j=0;j<columns;j++)
+      {
+ 
+       System.out.print(mat[i][j]+"\t");
+      }
+       System.out.println("");
+    }
+}
+
+}
+
+output:
+D:\jinter>javac Mymatrix.java
+
+D:\jinter>java Mymatrix
+Enter number of rows and columns
+4
+3
+Enter 12 Elements
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+2
+4
+1       2       3
+4       5       6
+7       8       9
+0       2       4
+
+14.
+The Matrix class has methods for each of the following:
+1 - get the number of rows
+2 - get the number of columns
+3 - set the elements of the matrix at given position (i,j)
+4 - adding two matrices. If the matrices are not addable, "Matrices cannot be added" will be displayed.
+5 - multiplying the two matrices
+Download Our A
+package jintership;
+import java.util.*;
+
+public class matrix {
+	int m,n,i,j;
+	Scanner s=new Scanner(System.in);
+	void get_row()
+	{
+		System.out.println("Enter the number of rows");
+		m=s.nextInt();
+	}
+	
+	void get_col()
+	{
+		System.out.println("Enter the number of column");
+		n=s.nextInt();
+	}
+	
+	int first[][]=new int[m][n];
+	int second[][]=new int[m][n];
+	int sum[][]=new int[m][n];
+	int mul[][]=new int[m][n];
+	void set()
+	{
+		System.out.println("Enter the elemnt of first matrix");
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++);
+			first[i][j]=s.nextInt();
+		}
+		
+		System.out.println("Enter the elemnt of second matrix");
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++);
+			second[i][j]=s.nextInt();
+		}
+
+	}
+	
+	void add_m()
+	{
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++);
+			sum[i][j]=first[i][j]+second[i][j];
+			System.out.println("sum of matrix"+sum[i][j]+"\t");
+		System.out.println();	
+		}
+		
+	}
+	
+	void mul_m()
+	{
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++);
+			mul[i][j]=first[i][j]*second[i][j];
+			System.out.println("multiplication of matrix"+mul[i][j]+"\t");
+		System.out.println();	
+		}
+		
+	}
+	
+}
+	package jintership;
+
+public class matrix1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+       matrix m1=new matrix();
+       m1.get_row();
+       m1.get_col();
+       m1.set();
+       m1.add_m();
+       m1.mul_m();
+       
+       
+	}
+
+}
+output:
+Enter the number of rows
+3
+Enter the number of column
+4
+Enter the elemnt of first matrix
+2
+3
+4
+Enter the elemnt of second matrix
+
+3
+
+4
+5
+sum of matrix5	
+
+sum of matrix7	
+
+sum of matrix9	
+
+multiplication of matrix6	
+
+multiplication of matrix12	
+
+multiplication of matrix20	
+

@@ -1,0 +1,978 @@
+Question 1
+
+Write a program to print numbers from 1 to 10.
+
+Show the answer.
+ code:
+public class Number1
+{
+ public static void main(String args[])
+   {
+     for(int i=1;i<=10;i++)
+      {
+        System.out.println(+i);
+      }
+   }
+}
+
+output:
+C:\>d:
+
+D:\>cd jinter
+
+D:\jinter>javac Number1.java
+
+D:\jinter>java Number1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Question 2
+
+Write a program to calculate the sum of first 10 natural number.
+
+Show the answer.
+code:
+public class Number2
+{
+ public static void main(String args[])
+   {
+     int sum=0;
+     for(int i=1;i<=10;i++)
+      { 
+        sum=sum+i;
+      }
+      System.out.println(+sum);
+   }
+}
+output:
+D:\jinter>javac Number2.java
+
+D:\jinter>java Number2
+55
+
+
+Question 3
+
+Write a program that prompts the user to input a positive integer. It should then print the multiplication table of that number. 
+
+Show the answer.
+code:
+import java.util.Scanner;
+public class Tabel1
+ {
+       public static void main(String args[])
+           {
+                 Scanner s=new Scanner(System.in);
+                 System.out.println("Enter the number");
+                  int n=s.nextInt();
+                   System.out.println("The tabel of "+n +"is:");
+                    for(int i=1;i<=10;i++)
+                     { 
+                           int t=n*i;
+                           System.out.println(+t);
+                       }
+      
+              }
+}
+
+output:
+D:\jinter>javac Tabel1.java
+
+D:\jinter>java Tabel1
+Enter the number
+5
+The tabel of 5is:
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+
+Question 4
+
+Write a program to find the factorial value of any number entered through the keyboard. 
+
+Show the answer.
+code:
+import java.util.Scanner;
+public class Myfactorial
+{
+ public static void main(String args[])
+   {
+     Scanner s=new Scanner(System.in);
+     System.out.println("Enter the number");
+     int n=s.nextInt();
+     System.out.println("The factorial of "+n + "is:");
+     int myfacto=1;
+     for(int x=1;x<=n;x++)
+      {
+       myfacto*=x;
+      }
+     System.out.println(+myfacto); 
+   }
+}
+
+output:
+D:\jinter>javac Myfactorial.java
+
+D:\jinter>java Myfactorial
+Enter the number
+12
+The factorial of 12is:
+479001600
+
+Question 5
+
+Two numbers are entered through the keyboard. Write a program to find the value of one number raised to the power of another. (Do not use Java built-in method)
+
+Show the answer.
+import java.util.*;
+class RaisedTo{
+ 
+ public static void main(String args[ ])
+   {
+       int n,p,result=1;
+       Scanner sc=new Scanner(System.in);
+       System.out.println("Enter two numbers");
+       n=sc.nextInt();
+       p=sc.nextInt();
+       for(int i=0;i<p;i++)
+          result*=n;
+      System.out.println("the value "+n+" Raised to "+p+" is "+result);
+    }
+}
+
+
+Question 6
+
+Write a program that prompts the user to input an integer and then outputs the number with the digits reversed. For example, if the input is 12345, the output should be 54321.
+
+Show the answer.
+code:
+import java.util.Scanner;
+public class Reversenumber
+{
+ public static void main(String args[])
+   {
+     Scanner s=new Scanner(System.in);
+     System.out.println("Enter the number which is to be reversed");
+     int n=s.nextInt();
+     int rev=0;
+     while(n!=0)
+      {
+       rev=rev*10;
+       rev=rev+n%10;
+       n=n/10;
+      }
+     System.out.println("Reverse of number by each digit is "+rev);
+     }
+}
+
+output:
+D:\jinter>javac Reversenumber.java
+
+D:\jinter>java Reversenumber
+Enter the number which is to be reversed
+1234
+Reverse of number by each digit is 4321
+Question 7
+
+Write a program that reads a set of integers, and then prints the sum of the even and odd integers.
+
+Show the answer.
+import java.util.Scanner;
+public class Summ
+{
+ public static void main(String args[])
+   {
+     Scanner s=new Scanner(System.in);
+     System.out.println("Enter the size of an array element");
+     int n=s.nextInt();
+     int[] a=new int[n];
+     int sEven=0,sOdd=0;
+     System.out.println("Enter the array element");
+     for(int i=0;i<n;i++)
+      {
+       a[i]=s.nextInt();
+      }
+     for(int i=0;i<n;i++)
+       {
+         if(a[i]%2==0)
+          {
+           sEven=sEven+a[i];
+          }
+        else
+          {
+           sOdd=sOdd+a[i];
+          }
+       }
+    System.out.println("sum of even number is"+sEven);
+    System.out.println("sum of odd number is"+sOdd);
+     
+    }
+}
+
+output:
+D:\jinter>javac Summ.java
+
+D:\jinter>java Summ
+Enter the size of an array element
+7
+Enter the array element
+1
+2
+3
+4
+5
+6
+7
+sum of even number is12
+sum of odd number is16
+Question 8
+
+Write a program that prompts the user to input a positive integer. It should then output a message indicating whether the number is a prime number. 
+
+Show the answer.
+import java.util.Scanner;
+public class Checkprime
+{
+ public static void main(String args[])
+   {
+     Scanner s=new Scanner(System.in);
+     System.out.println("Enter the number");
+     int n=s.nextInt();
+     for(int i=2;i<n/2;i++)
+      {
+        if(n%i==0)
+         {
+           System.out.println("Number is not prime number"+n);
+           break;
+         }
+     
+        else if(n==0||n==1)
+         {
+           System.out.println("Number is not prime number"+n);
+           break;
+         }
+        else
+         {
+           System.out.println(+n+"Number is prime number");
+           break;
+         }
+     
+      }
+  }
+}
+
+output:
+D:\jinter>javac Checkprime.java
+
+D:\jinter>java Checkprime
+Enter the number
+13
+13 Number is prime number
+Question 9
+
+Write a program to calculate HCF of Two given number.
+
+Show the answer.
+code:
+import java.util.Scanner;
+public class CalHcf
+{
+ public static void main(String args[])
+   {
+     Scanner s=new Scanner(System.in);
+     System.out.println("Enter the first number");
+     int n1=s.nextInt();
+     System.out.println("Enter the second number");
+     int n2=s.nextInt();
+     int temp;
+     while(n2>0)
+      {
+        temp=n2;
+        n2=n1%n2;
+        n1=temp;
+      }
+    System.out.println("HcF of two number is="+n1);  
+  }
+}
+
+output:
+D:\jinter>javac CalHcf.java
+
+D:\jinter>java CalHcf
+Enter the first number
+6
+Enter the second number
+30
+HcF of two number is=6
+Question 10
+
+Write a do-while loop that asks the user to enter two numbers. The numbers should be added and the sum displayed. The loop should ask the user whether he or she wishes to perform the operation again. If so, the loop should repeat; otherwise it should terminate. 
+
+Show the answer.
+import java.util.Scanner;
+public class Loop
+{
+ public static void main(String args[])
+   { 
+      Scanner s=new Scanner(System.in);
+      int choice;
+      
+      do
+       {
+        System.out.println("Enter the first number");
+        int n1=s.nextInt();
+        System.out.println("Enter the second number");
+        int n2=s.nextInt();
+        int sum=n1+n2; 
+        System.out.println("sum of two number is"+sum);
+        System.out.println("do you wnat to continue press 1/t press o to terminate");
+        choice=s.nextInt();
+        
+        }while(choice!=0);
+     
+         
+  }
+}
+
+output:
+D:\jinter>javac Loop.java
+
+D:\jinter>java Loop
+Enter the first number
+12
+Enter the second number
+3
+sum of two number is15
+do you wnat to continue press 1/t press o to terminate
+Question 11
+
+Write a program to enter the numbers till the user wants and at the end it should display the count of positive, negative and zeros entered. 
+
+Show the answer.
+import java.util.Scanner;
+public class Usernumber
+{
+  public static void main(String args[])
+   {
+    Scanner s=new Scanner(System.in);
+    int option=1;
+    int counter=0,negative=0,positive=0,zero=0,num;
+    while(option!=0)
+     {
+      ++counter;
+      System.out.println("Enter the Number:");
+      num=s.nextInt();
+      if(num==0)
+       {
+         ++zero;
+        }
+      else if(num>0)
+       {
+        ++positive;
+       }
+      else
+       {
+        ++negative;
+       }
+     System.out.println("Enter the 1 for continue or 0 for terminate");
+     option=s.nextInt();
+     }
+    System.out.println("Total number of entries"+counter);
+    System.out.println("zeros entries"+zero);
+    System.out.println("positive entries"+positive);
+    System.out.println("negative entries"+negative);
+    s.close();
+   }
+}  
+output:
+D:\jinter>javac Usernumber.java
+
+D:\jinter>java Usernumber
+Enter the Number:
+1
+Enter the 1 for continue or 0 for terminate
+1
+Enter the Number:
+4
+Enter the 1 for continue or 0 for terminate
+1
+Enter the Number:
+4
+Enter the 1 for continue or 0 for terminate
+5
+Enter the Number:
+0
+Enter the 1 for continue or 0 for terminate
+2
+Enter the Number:
+6
+Enter the 1 for continue or 0 for terminate
+7
+Enter the Number:
+-2
+Enter the 1 for continue or 0 for terminate
+4
+Enter the Number:
+-4
+Enter the 1 for continue or 0 for terminate
+0
+Total number of entries7
+zeros entries1
+positive entries4
+negative entries2
+Question 12
+
+Write a program to enter the numbers till the user wants and at the end the program should display the largest and smallest numbers entered.
+
+Show the answer.
+import java.util.Scanner;
+public class Usernumber
+{
+  public static void main(String args[])
+   {
+    int largest=0,smallest=0,num=0;
+    Scanner s=new Scanner(System.in);
+    
+    while(num!=-999)
+       {
+         System.out.println("Enter the number or -999 for exit");
+         num=s.nextInt();
+ 
+         if(num>largest)
+          {
+           largest=num;
+          }
+         else if(num<smallest)
+          {
+           smallest=num;
+          }
+         else
+          {
+           System.out.println("Error");
+          }
+         
+         }
+    
+    System.out.println("largest number is"+largest);
+    System.out.println("smallest number is"+smallest);
+   }
+}  
+
+output:
+D:\jinter>javac Usernumber.java
+
+D:\jinter>java Usernumber
+Enter the number or -999 for exit
+2
+Enter the number or -999 for exit
+5
+Enter the number or -999 for exit
+7
+Enter the number or -999 for exit
+-999
+largest number is7
+smallest number is-999
+Question 13
+
+Write a program to print out all Armstrong numbers between 1 and 500. If sum of cubes of each digit of the number is equal to the number itself, then the number is called an Armstrong number.
+For example, 153 = ( 1 * 1 * 1 ) + ( 5 * 5 * 5 ) + ( 3 * 3 * 3 )
+
+Show the answer.
+import java.util.*;
+public class Armnumber
+{
+  public static void main(String args[])
+   {
+    int num,rem=0,sum=0;
+    for(int i=1;i<=500;i++)
+      {
+       num=i;
+       while(num>0)
+        {
+         rem=num%10;
+         sum=sum+(rem*rem*rem);
+         num=num/10;
+        }
+       if(sum==i)
+        {
+         System.out.println(+i);
+        }
+       sum=0;
+      }
+   }
+}
+
+output:
+D:\jinter>javac Armnumber.java
+
+D:\jinter>
+D:\jinter>java Armnumber
+1
+153
+370
+371
+407
+
+Question 14
+
+Write a program to print Fibonacci series of n terms where n is input by user :
+0 1 1 2 3 5 8 13 24 ..... 
+
+Show the answer.
+import java.util.*;
+public class Fibo
+{
+  public static void main(String args[])
+   {
+    int num1=0,num2=1,num3;
+    Scanner s=new Scanner(System.in);
+    System.out.println("Enter n terms");
+    int n=s.nextInt();
+    for(int i=2;i<=n;i++)
+      {
+       num3=num1+num2;
+       System.out.println(+num3);
+       num1=num2;
+       num2=num3;
+      }
+   }
+}
+output:
+D:\jinter>javac Fibo.java
+
+D:\jinter>java Fibo
+Enter n terms
+7
+1
+2
+3
+5
+8
+13
+Question 15
+
+Write a program to calculate the sum of following series where n is input by user. 
+1 + 1/2 + 1/3 + 1/4 + 1/5 +…………1/n 
+
+Show the answer.
+import java.util.*;
+public class Haremonicseries
+{
+public static void main(String args[])
+{
+int n,i;
+float sum=0;
+Scanner s=new Scanner(System.in);
+n=s.nextInt();
+for(i=1;i<=n;i++)
+{
+sum=sum+(float)1/i;
+}
+System.out.println("the sum is"+sum);
+}
+}
+
+output:
+D:\jinter>javac Haremonicseries.java
+
+D:\jinter>java Haremonicseries
+8
+the sum is2.7178574
+Question 16
+
+Compute the natural logarithm of 2, by adding up to n terms in the series
+1 - 1/2 + 1/3 - 1/4 + 1/5 -... 1/n
+where n is a positive integer and input by user.
+
+Show the answer.
+import java.util.*;
+public class Logrith
+{
+  public static void main(String args[])
+  {
+    int i,num,sign=-1;
+    float sum=0;
+    System.out.println("Enter the Number ");
+    Scanner s=new Scanner(System.in);
+    num=s.nextInt();
+    for(i=1;i<=num;i++)
+    {
+      sign*=-1;
+      sum+=sign*1.0/i;
+     }
+    System.out.println("Log 2:"+sum);
+ }
+}
+output:D:\jinter>javac Logrith.java
+
+D:\jinter>java Logrith
+Enter the Number
+1000
+Log 2:0.6926457
+Question 17
+
+Write a program that generates a random number and asks the user to guess what the number is. If the user's guess is higher than the random number, the program should display "Too high, try again." If the user's guess is lower than the random number, the program should display "Too low, try again." The program should use a loop that repeats until the user correctly guesses the random number.
+
+Show the answer.
+import java.util.*;
+public class Guessnumber
+{
+  public static void main(String args[])
+  {
+   Random r=new Random();
+   Scanner s=new Scanner(System.in);
+   int randnum=r.nextInt(100);
+   int tries=0;
+   boolean win=true;
+   int guessnum;
+   while(win!=false)
+   {
+     System.out.println("Enter the Number between 1 to 100");
+     guessnum=s.nextInt();
+     tries++;
+     if(guessnum==randnum)
+     {
+      System.out.println("you Win!!! The number was: "+randnum);
+      break;
+     }
+     else if(guessnum>randnum)
+     {
+      System.out.println("your guess number is to large");
+     }
+     else if(guessnum<randnum)
+     {
+      System.out.println("your guess number is to small");
+     }
+   }
+  
+  }
+
+
+}
+/*output:
+D:\jinter>javac Guessnumber.java
+
+D:\jinter>java Guessnumber
+Enter the Number between 1 to 100
+44
+your guess number is to large
+Enter the Number between 1 to 100
+22
+your guess number is to small
+Enter the Number between 1 to 100
+39
+your guess number is to small
+Enter the Number between 1 to 100
+42
+your guess number is to large
+Enter the Number between 1 to 100
+40
+your guess number is to small
+Enter the Number between 1 to 100
+41
+you Win!!! The number was: 41*/
+Question 18
+
+Write a program to print following :
+
+ 
+
+i)
+
+
+import java.util.*;
+public class pattern1
+{
+  public static void main(String args[])
+  {
+    int i,j;
+    for(i=1;i<=4;i++)
+    {
+     for(j=1;j<=10;j++)
+     {
+      System.out.println("*");
+     }
+    }
+  }
+}
+output:
+D:\jinter>java pattern1
+**********
+**********
+**********
+**********
+ii)
+import java.util.*;
+public class pattern1
+{
+  public static void main(String args[])
+  {
+    int i,j;
+    for(i=1;i<=5;i++)
+    {
+      for(j=1;j<=i;j++)
+      {
+        System.out.print("*");
+      }
+     System.out.println();
+    }
+    
+  }
+}
+
+
+
+*
+**
+***
+****
+*****
+
+ 
+
+iv)
+import java.util.*;
+public class pattern1
+{
+  public static void main(String args[])
+  {
+    int i,j,k=5,n=1;
+    for(i=1;i<=11;i+=2)
+    {
+      for(j=k;j>0;j--)
+      {
+        System.out.print("");
+      }
+      for(j=1;j<=i;j++)
+      {
+        System.out.print("*");
+
+      }
+     
+     System.out.println("");
+     k--;
+     n++;
+    }
+    
+  }
+}
+output:
+
+
+        *
+      ***
+    *****
+  *******
+*********
+
+v)
+import java.util.*;
+public class pattern1
+{
+  public static void main(String args[])
+  {
+    int i,j,k=5,n=1;
+    for(i=1;i<=11;i+=2)
+    {
+      for(j=k;j>0;j--)
+      {
+        System.out.print("");
+      }
+      for(j=1;j<=i;j++)
+      {
+        System.out.print(n);
+
+      }
+     
+     System.out.println("");
+     k--;
+     n++;
+    }
+    
+  }
+}
+output:
+
+
+        1
+      222
+    33333
+  4444444
+555555555
+
+vi)
+import java.util.*;
+public class pattern1
+{
+  public static void main(String args[])
+  {
+    int i,j,k,n,a;
+    Scanner s=new Scanner(System.in);
+    System.out.println("Enter the value of n");
+    n=s.nextInt();
+    a=n;
+    for(i=1;i<n;i++)
+    {
+      for(j=a;j>1;j--)
+      {
+        System.out.print("");
+      }
+      for(k=i;k!=0;k--)
+      {
+        System.out.print(k);
+      }
+       a--;
+      for(int l=2;l<=i;l++)
+      {
+        System.out.print(l);
+      }
+     
+      System.out.println("");
+     
+     
+    }
+    
+  }
+}
+output:
+D:\jinter>java pattern1
+Enter the value of n
+5
+
+        1
+      212
+    32123
+  4321234
+543212345
+
+ 
+
+Question 19
+
+Write a program to compute sinx for given x. The user should supply x and a positive integer n. We compute the sine of x using the series and the computation should use all terms in the series up through the term involving xn
+
+sin x = x - x3/3! + x5/5! - x7/7! + x9/9! .......
+import java.lang.*;
+import java.util.*;
+public class Sin_series
+{
+  public static void main(String args[])
+  {
+    Scanner s=new Scanner(System.in);
+    System.out.println("Enter the value of theta");
+    int x=s.nextInt();
+    System.out.println("Enter the value of term:");
+    int n=s.nextInt();
+    double redian=x*Math.PI/180;
+    int power=1;
+    double sinx=0.0;
+    for(int i=1;i<=n;i++)
+    { 
+      double c_term=0.0;
+      if(i%2!=0)
+      {
+        c_term=Math.pow(redian,power)/facto(power);
+      }
+      else
+      {
+        c_term = -Math.pow(redian,power)/facto(power);
+      }
+      sinx+=c_term; 
+      power+=2;
+    }
+    System.out.println(sinx);
+  }
+   static int facto(int n)
+   {
+    int fact=1;
+     for(int i=1;i<=n;i++)
+      {
+        fact=fact*i;
+      }
+     return fact;
+   }
+
+
+}
+
+output:
+D:\jinter>java Sin_series
+Enter the value of theta
+90
+Enter the value of term:
+4
+0.9998431013994987
+
+
+Question 20
+
+Write a program to compute the cosine of x. The user should supply x and a positive integer n. We compute the cosine of x using the series and the computation should use all terms in the series up through the term involving xn
+
+cos x = 1 - x2/2! + x4/4! - x6/6! .....
+import java.lang.*;
+import java.util.*;
+public class cos_series
+{
+  public static void main(String args[])
+  {
+    Scanner s=new Scanner(System.in);
+    System.out.println("Enter the value of theta");
+    int x=s.nextInt();
+    System.out.println("Enter the value of term:");
+    int n=s.nextInt();
+    double redian=Math.toRadians(x);
+    int power=0;
+    double cosx=0.0;
+    for(int i=1;i<=n;i++)
+    { 
+      double c_term=0.0;
+      if(i%2!=0)
+      {
+        c_term=Math.pow(redian,power)/facto(power);
+      }
+      else
+      {
+        c_term = -Math.pow(redian,power)/facto(power);
+      }
+      cosx+=c_term; 
+      power+=2;
+    }
+    System.out.println(cosx);
+  }
+   static int facto(int n)
+   {
+    int fact=1;
+     for(int i=1;i<=n;i++)
+      {
+        fact=fact*i;
+      }
+     return fact;
+   }
+
+
+}
+
+output:
+D:\jinter>java cos_series
+Enter the value of theta
+45
+Enter the value of term:
+4
+0.7071032148228457
+
+ 
