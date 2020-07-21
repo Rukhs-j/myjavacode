@@ -1,0 +1,722 @@
+﻿1) Explain the different ways of constructing an ArrayList?
+ans:
+Arralist using Iterator:
+package jintership;
+import java.util.*;
+
+public class MyArraylist {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   ArrayList<String>l1=new ArrayList<String>();
+   l1.add("Tomato");
+   l1.add("Potato");
+   l1.add("Garlic");
+   Iterator<String>itr=l1.iterator();//traversing list through Iterator
+   while(itr.hasNext())
+   {
+   System.out.println(itr.next());
+	}
+
+}
+}output:
+Tomato
+Potato
+Garlic
+package jintership;
+import java.util.*;
+
+public class MyArraylist {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+   ArrayList<String>l1=new ArrayList<String>();
+   l1.add("Tomato");
+   l1.add("Potato");
+   l1.add("Garlic");
+   //traversing through for each loop
+   for(String veg:l1)
+   {
+	   System.out.println(veg);
+   }
+   }
+}
+output:
+Tomato
+Potato
+Garlic
+
+---------------------------------------
+2) How do you increase the current capacity of an ArrayList?
+
+ensureCapacity() method is used to increase the current capacity of an ArrayList. However, capacity of an ArrayList is automatically increased when we try to add more elements than the current capacity. To manually increase the current capacity, ensureCapacity() method is used.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(5);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       l2.ensureCapacity(10);
+       for(Integer n:l2)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+1
+2
+3
+4
+-----------------------------------------------------------
+3) How do you decrease the current capacity of an ArrayList to the current size?
+
+trimToSize() method is used to trim the capacity of arrayList to the current size of ArrayList. Developers use this method to minimize the storage area of an ArrayList.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList3 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l3=new ArrayList<Integer>(20);
+       l3.add(1);
+       l3.add(2);
+       l3.add(3);
+       l3.add(4);
+       l3.trimToSize();//trim the size to number of element
+       
+       for(Integer n:l3)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+1
+2
+3
+4
+
+
+--------------------------------------------------------------------------------
+4) How do you find the number of elements present in an ArrayList?
+
+Using size() method. size() method returns number of elements present in an ArrayList.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList4 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l4=new ArrayList<Integer>(20);
+       l4.add(1);
+       l4.add(2);
+       l4.add(3);
+       l4.add(4);
+       System.out.println("Length of the list:"+l4.size());//Return the number of element present in list
+       
+       for(Integer n:l4)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+Length of the list:4
+1
+2
+3
+4
+
+
+----------------------------------------------------------------------------------------
+5) How do you find out whether the given ArrayList is empty or not?
+
+isEmpty() method of ArrayList is used to check whether the given ArrayList is empty or not. This method returns true if an ArrayList contains no elements otherwise returns false.
+
+Note : You can also use size() method to check whether the given ArrayList is empty or not. size() method returns ‘0’ if an ArrayList is empty.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       System.out.println(l2.isEmpty());//Return true if list empty
+       
+       for(Integer n:l2)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+false
+1
+2
+3
+4
+-----------------------------------------------------------
+6) How do you check whether the given element is present in an ArrayList or not?
+
+Using contains() method of ArrayList, we can examine whether the ArrayList contains the given element or not. This method returns true if ArrayList has that element otherwise returns false.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       System.out.println(l2.contains(3));//Return true if list contain that element
+       
+       for(Integer n:l2)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+true
+1
+2
+3
+4
+------------------------------------------------
+7) How do you get the position of a particular element in an ArrayList?
+
+We can use indexOf() and lastIndexOf() methods to find out the position of a given element in an ArrayList. indexOf() method returns index of first occurrence of a specified element where as lastIndexOf() method returns index of last occurrence of a specified element in an ArrayList. If element is not found, they will return -1.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("The position of 2 in list is:"+l2.indexOf(2));//it gives the position of element in list
+       System.out.println("The position of 5 in list is:"+l2.indexOf(5));
+       System.out.println("The position of 2 in list is:"+l2.lastIndexOf(2));//it last_occurance position of 2
+       for(Integer n:l2)
+          {
+	        System.out.println(+n);
+          }
+	}
+
+}
+output:
+The position of 2 in list is:1
+The position of 5 in list is:-1
+The position of 2 in list is:3
+1
+2
+3
+2
+4
+
+
+------------------------------------------------------
+8) How do you convert an ArrayList to Array?
+
+Using toArray() method of ArrayList class. toArray() method returns an array containing all elements of the ArrayList. This method acts as a bridge between normal arrays and collection framework in java.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       int l=l2.size();
+       System.out.println("length of Arraylist:"+l);
+       System.out.println("Element of ArrayList:");
+       for(Integer n:l2)
+          {
+	        System.out.println(+n);
+          }
+       Integer a[] = new Integer[l];
+       a=l2.toArray(a);
+       System.out.println("Element of Array:");
+       for(Integer x:a)
+       {
+    	   System.out.println(+x);
+       }
+	}
+
+}
+output:
+length of Arraylist:5
+Element of ArrayList:
+1
+2
+3
+2
+4
+Element of Array:
+1
+2
+3
+2
+4
+
+---------------------------------------------
+9) How do you retrieve an element from a particular position of an ArrayList?
+
+get() method returns an element from a specified position of an ArrayList. This method takes index of the element as an argument.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       int l=l2.size();
+       System.out.println("length of Arraylist:"+l);
+      for(int i=0;i<l;i++)
+      {
+    	  System.out.println(l2.get(i));
+      }
+	}
+
+}
+output:
+length of Arraylist:5
+1
+2
+3
+2
+4
+
+
+----------------------------------------------
+10) How do you replace a particular element in an ArrayList with the given element?
+
+set() method replaces a particular element in an Arraylist with the given element. This method takes two arguments. One is the index of the element to be replaced and another one is the element to be placed at that position.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       int l=l2.size();
+       System.out.println("length of Arraylist:"+l);
+       l2.set(2, 7);
+      for(int i=0;i<l;i++)
+      {
+    	  System.out.println(l2.get(i));
+      }
+	}
+
+}
+output:
+length of Arraylist:5
+1
+2
+7
+2
+4
+
+--------------------------------------------
+11) How do you append an element at the end of an ArrayList?
+
+add() method appends an element at the end of an ArrayList.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       l2.add(5);
+       System.out.println("list after appending new element:"+l2);
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+list after appending new element:[1, 2, 3, 2, 4, 5]
+
+
+-------------------------------------------------
+12) How do you insert an element at a particular position of an ArrayList?
+
+add() method which takes index and an element as arguments can be used to insert an element at a particular position of an ArrayList. The elements at the right side of that position are shifted one position right i.e indices of right side elements of that position are increased by 1.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       l2.add(2,5);
+       System.out.println("list after appending new element:"+l2);
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+list after appending new element:[1, 2, 5, 3, 2, 4]
+
+
+
+--------------------------------------
+13) How do you remove an element from a particular position of an ArrayList?
+
+remove() method which takes int type as an argument is used to remove an element from a particular position of an ArrayList.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       l2.remove(2);
+       System.out.println("list after removing the element:"+l2);
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+list after removing the element:[1, 2, 2, 4]
+
+ 
+-----------------------------------------
+14) How do you remove the given element from an ArrayList?
+
+remove(Object obj) method removes the first occurrence of the specified element ‘obj‘. If that element doesn’t exist, ArrayList will be unchanged.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       l2.remove(new Integer(4));//remove method by value
+       System.out.println("list after removing the element:"+l2);
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+list after removing the element:[1, 2, 3, 2]
+
+----------------------------------------------
+15) How do you remove all elements of an ArrayList at a time?
+
+clear() method removes all elements of an ArrayList. ArrayList will be empty after this method is executed.
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       l2.clear();//remove all the element from list
+       System.out.println("list after removing all element:"+l2);
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+list after removing all element:[]
+
+
+------------------------------------
+16) How do you retrieve a portion of an ArrayList?
+
+Using subList() method of ArrayList, we can retrieve a portion of an ArrayList. subList() method returns a view of a portion of an ArrayList in the given range. The returned subList is backed by original ArrayList. That means any changes made to subList will be reflected in original ArrayList or Vice-Versa.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(2);
+       l2.add(4);
+       System.out.println("list:"+l2);
+       
+       System.out.println("sublist is:"+l2.subList(1,3));
+
+       
+	}
+
+}
+output:
+list:[1, 2, 3, 2, 4]
+sublist is:[2, 3]
+
+
+---------------------------------------------
+17) How do you join two ArrayLists?
+
+We can use addAll() method which takes Collection type as an argument to join two ArrayLists. This method appends all elements of the passed collection to the end of the invoking collection.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       System.out.println("list1:"+l2);
+       ArrayList<Integer>l3=new ArrayList<Integer>(10);
+       l3.add(6);
+       l3.add(7);
+       l3.add(8);
+       System.out.println("list2:"+l3);
+       l2.addAll(l3);
+       System.out.println("New list"+l2);
+      
+
+	}
+
+}
+output:
+list1:[1, 2, 3, 4]
+list2:[6, 7, 8]
+New list[1, 2, 3, 4, 6, 7, 8]
+
+-------------------------------------------------------------
+18) How do you insert more than one element at a particular position of an ArrayList?
+
+Another version of addAll() method which takes two arguments, one is index and another one is Collection type, can be used for this requirement. This method inserts all of the elements of passed collection at a specified position of an ArrayList.
+
+
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       System.out.println("list1:"+l2);
+       Vector<Integer> v=new Vector<Integer>();
+       v.add(5);
+       v.add(6);
+       v.add(7);
+       l2.addAll(1,v);
+       System.out.println("new list:"+l2);
+       
+       
+      	}
+
+}
+output:
+list1:[1, 2, 3, 4]
+new list:[1, 5, 6, 7, 2, 3, 4]
+
+
+19 All Arraylist Method in one pgm.
+package jintership;
+import java.util.*;
+
+
+public class MYArrayList2 {
+
+	public static void main(String[] args) {
+		
+       ArrayList<Integer>l2=new ArrayList<Integer>(20);
+       l2.add(1);
+       l2.add(2);
+       l2.add(3);
+       l2.add(4);
+       l2.ensureCapacity(10);//used to increase current capacity of list
+       l2.trimToSize();//trim the size to number of element
+       System.out.println("Length of the list:"+l2.size());//Return the number of element present in list
+       System.out.println(l2.isEmpty());//Return true if list empty
+       System.out.println(l2.contains(3));//Return true if list contain that element
+       System.out.println("The position of 2 in list is:"+l2.indexOf(2));//it gives the position of element in list
+       System.out.println("The position of 5 in list is:"+l2.indexOf(5));
+       System.out.println("The position of 2 in list is:"+l2.lastIndexOf(2));//it last_occurance position of 2
+       Integer a[] = new Integer[l2.size()];
+       a=l2.toArray(a);//convert ArrayList to array 
+       System.out.println("Element of Array:");
+       for(Integer x:a)
+       {
+    	   System.out.println(+x);
+       }
+      
+       l2.set(2, 7);//set() method ..replacing element
+       for(int i=0;i<l2.size();i++)
+       {
+     	  System.out.println(l2.get(i));//retrieving element using get method
+       }
+       l2.remove(2);//remove method by index
+       System.out.println("list after removing the element:"+l2);
+       
+       l2.remove(new Integer(4));//remove method by value
+       System.out.println("list after removing the element:"+l2);
+
+       System.out.println("list1:"+l2);
+       Vector<Integer> v=new Vector<Integer>();
+       v.add(5);
+       v.add(6);
+       v.add(7);
+       l2.addAll(1,v);
+       System.out.println("new list:"+l2);
+       
+       System.out.println("list:"+l2);
+       System.out.println("sublist is:"+l2.subList(1,3));
+       ArrayList<Integer>l3=new ArrayList<Integer>(10);
+       l3.add(6);
+       l3.add(7);
+       l3.add(8);
+       System.out.println("list2:"+l3);
+       l2.addAll(l3);
+       System.out.println("New list"+l2);
+      
+       
+       l2.clear();//remove all the element from list
+       System.out.println("list after removing all element:"+l2);
+       
+       
+      	}
+
+}
+output:
+The position of 2 in list is:1
+Element of Array:
+1
+2
+3
+4
+1
+2
+7
+4
+list after removing the element:[1, 2, 4]
+list after removing the element:[1, 2]
+list1:[1, 2]
+new list:[1, 5, 6, 7, 2]
+list:[1, 5, 6, 7, 2]
+sublist is:[5, 6]
+list2:[6, 7, 8]
+New list[1, 5, 6, 7, 2, 6, 7, 8]
+list after removing all element:[]
