@@ -1,0 +1,548 @@
+﻿1) How to Print duplicate characters from String?
+For example, if String is "Java" then the program should print "a". 
+package jintership;
+import java.util.*;
+
+public class Dfinder {
+	public void find(String str) {  
+        Map<Character, Integer> bp = new HashMap<Character, Integer>();  
+        char[] charArray = str.toCharArray();  
+        for (Character ch : charArray) {  
+            if (bp.containsKey(ch)) {  
+                bp.put(ch, bp.get(ch) + 1);  
+            } else {  
+                bp.put(ch, 1);  
+            }  
+        }  
+        Set<Character> keys = bp.keySet();  
+        for (Character ch : keys) {  
+            if (bp.get(ch) > 1) {  
+                System.out.println(ch + "  is " + bp.get(ch) + " times");  
+            }  
+        }  
+    }  
+   
+
+
+}
+package jintership;
+
+public class Dfinder1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Dfinder f=new Dfinder();
+		f.find("hello world");
+
+	}
+
+}
+output:'
+l  is 3 times
+o  is 2 times
+
+
+
+2) How to check if two Strings are anagrams of each other?
+A simple coding problem based upon String, but could also be asked with numbers. You need to write a Java program to check if two given strings are anagrams of Each other. Two strings are anagrams if they are written using the same exact letters, ignoring space, punctuation, and capitalization. Each letter should have the same count in both strings. For example, the Army and Mary are an anagram of each other.
+package jintership;
+import java.util.*;
+
+
+public class MyArnagram {
+	static int NO_OF_CHARS = 256; 
+	  
+    /* function to check whether two strings 
+    are anagram of each other */
+    static boolean areAnagram(char s1[], char s2[]) 
+    { 
+        // Create 2 count arrays and initialize 
+        // all values as 0 
+        int count1[] = new int[NO_OF_CHARS]; 
+        Arrays.fill(count1, 0); 
+        int count2[] = new int[NO_OF_CHARS]; 
+        Arrays.fill(count2, 0); 
+        int i; 
+  
+        // For each character in input strings, 
+        // increment count in the corresponding 
+        // count array 
+        for (i = 0; i < s1.length && i < s2.length; 
+             i++) { 
+            count1[s1[i]]++; 
+            count2[s2[i]]++; 
+        } 
+  
+        // If both strings are of different length. 
+        // Removing this condition will make the program 
+        // fail for strings like "aaca" and "aca" 
+        if (s1.length != s2.length) 
+            return false; 
+  
+        // Compare count arrays 
+        for (i = 0; i < NO_OF_CHARS; i++) 
+            if (count1[i] != count2[i]) 
+                return false; 
+  
+        return true; 
+    } 
+
+    public static void main(String args[]) 
+    { 
+    	Scanner s=new Scanner(System.in);
+    	System.out.println("Enter the first  string");
+    	String str1=s.nextLine();
+    	System.out.println("Enter the second  string");
+    	String str2=s.nextLine();
+        char s1[] = str1.toCharArray(); 
+        char s2[] = str2.toCharArray(); 
+  
+        if (areAnagram(s1, s2)) 
+            System.out.println("The two strings are"
+                               + "anagram of each other"); 
+        else
+            System.out.println("The two strings are not"
+                               + " anagram of each other"); 
+    } 
+    
+}
+output:
+Enter the first  string
+army
+Enter the second  string
+mary
+The two strings areanagram of each other
+
+3) How to program to print first non repeated character from String?
+One of the most common string interview questions: Find the first non-repeated (unique) character in a given string. for example, if given String is "Morning" then it should print "M". This question demonstrates the efficient use of the hash table data structure.
+package jintership;
+import java.util.*;
+
+public class Nchar {
+
+	public static void main(String[] args) {
+
+             Scanner scanner = new Scanner(System.in);
+             System.out.println("Enter the  String:");
+
+             System.out.println("First Non Repeat character is " + getFirstNonRepeatedChar(scanner.nextLine()));
+             System.out.println("First Non Repeat character is " + getFirstNonRepeatedChar(scanner.next()));
+
+      }
+
+      public static char getFirstNonRepeatedChar(String word) {
+             char[] character = word.toCharArray();
+             Map<Character, Integer> map = new HashMap<Character, Integer>();
+             for (Character ch : character) {
+                    if (map.containsKey(ch)) {
+                          map.put(ch, map.get(ch) + 1);
+                    } else {
+                          map.put(ch, 1);
+                    }
+
+             }
+             for(Map.Entry<Character, Integer> entry : map.entrySet()) {
+                    if (entry.getValue() == 1) {
+                          return entry.getKey();
+                    }
+             }
+             throw new RuntimeException("didn't find any non repeated Character");
+      }
+
+
+
+
+	}
+
+
+output:
+Enter the  String:
+hello
+First Non Repeat character is e
+
+
+4) How to reverse String in Java using Iteration and Recursion?
+Your task is to write a program to reverse String in Java without using the StringBuffer class. You also need to provide both iterative and recursive algorithms for String reversal. You can use other String utility methods e.g. charAt(), toCharArray() or substring() from java.lang.String class.
+import java.util.*;
+
+public class MyReverseString {
+
+	public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        
+        System.out.println("Enter the Original String: ");
+        String str = s.nextLine();
+
+
+        //iterative method to reverse String in Java
+        String reverseStr = reverse(str);
+        System.out.println("Reverse String in Java using Iteration: " + reverseStr);
+
+        //recursive method to reverse String in Java
+        reverseStr = reverseRecursively(str);
+        System.out.println("Reverse String in Java using Recursion: " + reverseStr);
+
+      }
+
+       public static String reverse(String str) {
+        StringBuilder strBuilder = new StringBuilder();
+        char[] strChars = str.toCharArray();
+
+        for (int i = strChars.length - 1; i >= 0; i--) {
+            strBuilder.append(strChars[i]);
+        }
+
+        return strBuilder.toString();
+    }
+
+      public static String reverseRecursively(String str) {
+
+        //base case to handle one char string and empty string
+        if (str.length() < 2) {
+            return str;
+        }
+
+        return reverseRecursively(str.substring(1)) + str.charAt(0);
+
+    }
+
+
+}D:\jinter>javac MyReverseString.java
+
+D:\jinter>java MyReverseString
+Enter the Original String:
+my name is rukhsar
+Reverse String in Java using Iteration: rashkur si eman ym
+Reverse String in Java using Recursion: rashkur si eman ym
+
+
+
+output:
+
+
+
+5) How to find duplicate characters in a String?
+You need to write a program to print all duplicate character and their count in Java. For example, if given String is "Programming" then your program should print
+g : 2
+r : 2
+m : 2
+
+package jintership;
+import java.util.*;
+
+public class Dfinder {
+	public void find(String str) {  
+        Map<Character, Integer> bp = new HashMap<Character, Integer>();  
+        char[] charArray = str.toCharArray();  
+        for (Character ch : charArray) {  
+            if (bp.containsKey(ch)) {  
+                bp.put(ch, bp.get(ch) + 1);  
+            } else {  
+                bp.put(ch, 1);  
+            }  
+        }  
+        Set<Character> keys = bp.keySet();  
+        for (Character ch : keys) {  
+            if (bp.get(ch) > 1) {  
+                System.out.println(ch + "  : " + bp.get(ch)");  
+            }  
+        }  
+    }  
+   
+
+
+}
+package jintership;
+
+public class Dfinder1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Dfinder f=new Dfinder();
+		f.find("hello world");
+
+	}
+
+}
+output:'
+l  : 3 
+o  : 2
+
+6) How to count a number of vowels and consonants in a String?
+One of the easiest String questions you will ever see. You have to write a Java program that will take a String input and print out a number of vowels and consonants on that String. For example, if the input is "Java" then your program should print "2 vowels and 2 consonants".
+import java.util.*;
+
+public class mycount {    
+	    public static void main(String[] args) {    
+	            
+	        //Counter variable to store the count of vowels and consonant    
+	        int vCount = 0, cCount = 0;    
+	            
+	        //Declare a string   
+	        Scanner s=new Scanner(System.in);
+                System.out.println("Enter the string");
+	        String str = s.nextLine();    
+	            
+	        //Converting entire string to lower case to reduce the comparisons    
+	        str = str.toLowerCase();    
+	            
+	        for(int i = 0; i < str.length(); i++) {    
+	            //Checks whether a character is a vowel    
+	            if(str.charAt(i) == 'a' || str.charAt(i) == 'e' || str.charAt(i) == 'i' || str.charAt(i) == 'o' || str.charAt(i) == 'u') {    
+	                //Increments the vowel counter    
+	                vCount++;    
+	            }    
+	            //Checks whether a character is a consonant    
+	            else if(str.charAt(i) >= 'a' && str.charAt(i)<='z') {      
+	                //Increments the consonant counter    
+	                cCount++;    
+	            }    
+	        }    
+	        System.out.println("Number of vowels: " + vCount);    
+	        System.out.println("Number of consonants: " + cCount);
+	        s.close();
+	    }    
+	}
+
+output:
+D:\jinter>javac mycount.java
+
+D:\jinter>java mycount
+Enter the string
+java intership
+Number of vowels: 5
+Number of consonants: 8
+
+7) How to count the occurrence of a given character in String?
+Your method must return a count of a given character, for example, if input String is "Java" and given character is 'a' then it should return 2.
+package jintership;
+import java.util.*;
+
+
+public class Occurance {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter the string");
+		String str=s.nextLine();
+		System.out.println("Enter the charactor");
+		char ch=s.next().charAt(0);
+		System.out.println(countChar(str,ch));
+		s.close();
+	   
+	}
+
+	public static int countChar(String str,char ch) {
+	        int count =0;
+			for(int i=0;i<str.length();i++)
+			{
+	            if(str.charAt(i)==ch)
+	            {
+	                ++count;
+	            }
+			}
+	        
+	        return count;
+	       
+			
+		
+	 }
+	
+	
+}
+
+output:
+Enter the string
+rukhsar
+Enter the charactor
+r
+2
+
+
+8) How to convert numeric String to an int?
+For example, if you pass "67263" to the program then it should return 67263.
+package jintership;
+
+
+public class Converstion {
+
+	public static void main(String[] args) {
+		String str="786";
+		int num;
+		
+		num=Integer.parseInt(str);
+		System.out.println(+num);
+		
+		
+
+	}
+
+}
+output:
+786
+
+9) How to find all permutations of String?
+Write a program to print all permutations of a String in Java, for example, if the input is "xyz" then it should print "xyz", "yzx", "zxy", "xzy", "yxz", "zyx".
+
+package jintership;
+import java.util.*;
+public class permutation{
+	    static void myPermutn(String str, String res) 
+	    { 
+	        if (str.length() == 0) { 
+	            System.out.print(res + " "); 
+	            return; 
+	        } 
+	  
+	        for (int i = 0; i < str.length(); i++) {
+	            char ch = str.charAt(i); 
+	  
+	           
+	            String ros = str.substring(0, i) +  
+	                         str.substring(i + 1);
+	            myPermutn(ros, res + ch); 
+	        } 
+	    } 
+	  
+	    // Driver code 
+	    public static void main(String[] args) 
+	    { 
+	    	Scanner s=new Scanner(System.in);
+	    	System.out.println("Enter the string");
+	        String str = s.nextLine(); 
+	        myPermutn(str, ""); 
+	        s.close();
+	    } 
+	}
+
+output:
+Enter the string
+abc
+abc acb bac bca cab cba 
+
+
+10) How to check if String is Palindrome?
+For example, if the input is "radar", the output should be true, if the input is "madam" output will be true, and if the input is "Java" output should be false.
+package jintership;
+import java.util.*;
+
+public class mypalandromeString {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		String rev="";
+		System.out.println("Enter the string");
+		String st=s.nextLine();
+		int l=st.length();
+		for(int i=l-1;i>=0;i--)
+		{
+			 rev=rev+st.charAt(i);
+		}
+		System.out.println(rev);
+	      if(st.equals(rev))
+	      {
+	           System.out.println("String is  palandromic:");
+	      }
+	      else {
+	     
+	          System.out.println("String is not palandromic");
+	     
+	      }
+	        
+	   
+	
+	      s.close();
+	}
+
+}
+output:
+Enter the string
+madam
+madam
+String is  palandromic:
+
+11) How to remove duplicate characters from String?
+For example, if the input is ‘bananas’ the output will be ‘bans’.
+package jintership;
+import java.util.*;
+
+public class Deletedupcharacter {
+	public static void main(String args[])
+	{
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter the string:");
+		String st=s.nextLine();
+		char[] charr=st.toCharArray();
+		Set set=new HashSet();
+		for(int i=0;i<charr.length;i++)
+		{
+			if(set.add(charr[i])) {
+				
+			 
+			  System.out.println(charr[i]);
+			  
+			}  
+		}
+		
+		s.close();
+	}
+}
+output:
+Enter the string:
+hello
+h
+e
+l
+o
+
+
+12) How to return the highest occurred character in a String?
+You need to write a function to implement an algorithm that will accept a string of characters and should find the highest occurrence of the character and display it. For example if input is "aaaaaaaaaaaaaaaaabbbbcddddeeeeee" it should return "a".
+
+package jintership;
+import java.util.*;
+
+public class Maxocurechar {
+
+	 static final int ASCII_SIZE = 256; 
+	    static char getMaxOccuringChar(String str) 
+	    { 
+	    
+	        int count[] = new int[ASCII_SIZE]; 
+	       
+	        int len = str.length(); 
+	        for (int i=0; i<len; i++) 
+	            count[str.charAt(i)]++; 
+	       
+	        int max = -1;  
+	        char result = ' ';  
+	       
+	        for (int i = 0; i < len; i++) { 
+	            if (max < count[str.charAt(i)]) { 
+	                max = count[str.charAt(i)]; 
+	                result = str.charAt(i); 
+	            } 
+	        } 
+	       
+	        return result; 
+	    } 
+	      
+	  
+	    public static void main(String[] args) 
+	    { 
+	        String str; 
+	        Scanner s=new Scanner(System.in);
+	        System.out.println("Enter the string");
+	        str=s.nextLine();
+	        
+	        System.out.println("Max occurring character is " + 
+	                            getMaxOccuringChar(str)); 
+	        s.close();
+	    } 
+	 
+	
+}
+output:
+Enter the string
+aaaaaaaadddddddddddddcccccccccccc
+Max occurring character is d
