@@ -1,0 +1,296 @@
+File IO problem
+Create new file 'test.txt'.
+import java.io.*;
+public class Myfile1
+{
+public static void main(String args[])
+{
+try
+{
+File f=new File("D:jinter:test.txt");
+if(f.createNewFile())
+{
+System.out.println("file created:"+f.getName());
+}
+else
+{
+System.out.println("file allready exist.");
+}
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+
+
+}
+}
+output:
+D:\jinter>javac Myfile1.java
+
+D:\jinter>java Myfile1
+file created:jinter:test.txt
+
+
+***********************Write a data in it of about 300 words.**********************
+import java.io.*;
+public class Myfile1
+{
+public static void main(String args[])
+{
+try
+{
+FileWriter fw=new FileWriter("D:jinter:test.txt",true);
+fw.write("hii my name is rukhsar and what about you");
+fw.write("ln ");
+fw.write("AAAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJJJJJJJJKKKKKKK");
+fw.write("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZCCCCCCCCCCCCCCCCCCCCCCCVVVVVVVVVVVVVVVVVBBBBBBBBBBBBBBBBNNNNNNNNNNNNNN");
+fw.write("aghdsfklgfdbnadwjygtu,nsfe ghjytdik,nfnmmnsdhjjkkjm,,afjmkuysuliufbnsdhygyijkldsfnjfiewun.n baygjyitouermmnehjkgytuefljmnbnhg");
+fw.close();
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+
+
+}
+}
+
+***********************read a file 'test.txt'.***************************
+import java.io.*;
+public class Myfile1
+{
+public static void main(String args[])
+{
+try
+{
+FileReader fr=new FileReader("D:jinter:test.txt");
+int ch;
+while((ch=fr.read()) != -1)
+{
+System.out.println((char)ch);
+}
+fr.close();
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+
+
+}
+}
+output:
+D:\jinter>java Myfile1
+h
+i
+i
+
+m
+y
+
+n
+a
+m
+e
+
+i
+s
+
+r..........
+**********************calculate the letter in it.(a,b,c,d....)*****************
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class LetterCount {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        Scanner input = new Scanner(new File("D:jinter:test.txt"));
+
+        int[] count = new int[26];
+
+        while (input.hasNextLine()) {
+            String answer = input.nextLine();
+            answer = answer.toLowerCase();
+            char[] characters = answer.toCharArray();
+
+            for (int i = 0; i < 26; i++) {
+                count[i]++;
+            }
+        }
+
+        for (int i = 0; i < 26; i++) {
+            System.out.print((char) (i + 'a'));
+            System.out.println(": " + count[i]);
+        }
+    }
+}
+
+
+constant in that file (b,c,d,f....)
+vowel in that file (a, e, i ,o ,u)
+words in a complete file.("JAVA")
+import java.io.*;
+public class Myfile1
+{
+public static void main(String args[])
+{
+try
+{
+File f=new File("D:jinter:test.txt");
+FileInputStream fstream=new FileInputStream(f);
+InputStreamReader istream=new InputStreamReader(fstream);
+BufferedReader br=new BufferedReader(istream);
+String line;
+int vowels=0,consonants=0,count=0;
+line=br.readLine();
+line=line.toLowerCase();
+if(line=="java")
+{
+System.out.println("present");
+}
+
+for(int i=0;i<line.length();i++)
+{
+char ch=line.charAt(i);
+if(ch=='a'|| ch=='e'||ch=='i'||ch=='o'||ch=='u')
+{
+vowels++;
+}
+else if((ch>='a' && ch<='z'))
+{
+consonants++;
+}
+}
+System.out.println("vowels"+vowels);
+System.out.println("consonates"+consonants);
+while((line=br.readLine())!="null")
+{
+String words[]=line.split("\\s+");
+count=count+words.length;
+}
+System.out.println("Number of words in file"+count);
+
+
+
+
+br.close();
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+
+
+}
+}
+
+
+
+calcualte  how many time one charater is repeated.(a=10,b=50,z=34....)
+package jintership;
+import java.util.*;
+import java.io.*;
+
+public class MyhP {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+    HashMap<String,Integer>world=new HashMap<String,Integer>() ;
+    BufferedReader br=null;
+    try
+    {
+     br=new BufferedReader(new FileReader("D:\\jinter\\Rukhsar.txt"));
+     String line=br.readLine();
+     while(line!=null)
+     {
+    	 String[] words=line.toLowerCase().split("");
+    	 for(String w:words)
+    	 {
+    		 if(world.containsKey(w))
+    		 {
+    			world.put(w,world.get(w)+1) ;
+    		 }
+    		 else
+    		 {
+    			 world.put(w, 1);
+    		 }
+    	 }
+    	 line=br.readLine();
+    		 
+     }
+     String mrw=null;
+     int count=0;
+     Set<Map.Entry<String,Integer>>entryset=world.entrySet();
+     for(Map.Entry<String,Integer>entry:entryset) {
+    	 if(entry.getValue() >count)
+    	 {
+    	   mrw=entry.getKey();
+    	   count=entry.getValue();
+    	 }
+     }
+   System.out.println(mrw);
+   System.out.println(count);
+    
+    }
+    catch(IOException e)
+    {
+    	System.out.println(e);
+    }
+		
+		
+	}
+
+}
+output:
+z
+40
+
+save that file with other name 'test_copy.txt'.
+package jintership;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Myfile {
+
+	    public static void main(String[] args)
+	    {	
+	    	
+	       FileInputStream instream = null;
+		   FileOutputStream outstream = null;
+	 
+	    	try{
+	    	    File infile =new File("D:\\\\jinter\\\\Rukhsar.txt");
+	    	    File outfile =new File("D:\\jinter\\Rukhsar_copy.txt");
+	 
+	    	    instream = new FileInputStream(infile);
+	    	    outstream = new FileOutputStream(outfile);
+	 
+	    	    byte[] buffer = new byte[1024];
+	 
+	    	    int length;
+	    	    /*copying the contents from input stream to
+	    	     * output stream using read and write methods
+	    	     */
+	    	    while ((length = instream.read(buffer)) > 0){
+	    	    	outstream.write(buffer, 0, length);
+	    	    }
+
+	    	    //Closing the input/output file streams
+	    	    instream.close();
+	    	    outstream.close();
+
+	    	    System.out.println("File copied successfully!!");
+	 
+	    	}catch(IOException ioe){
+	    		ioe.printStackTrace();
+	    	 }
+	    }
+	}
+
+output:
+File copied successfully!!

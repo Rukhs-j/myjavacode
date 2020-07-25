@@ -1,0 +1,118 @@
+Generic
+1.Write a generic method to find the maximal element in the range [begin, end] of a list.
+i/p :  {2,62, 4,78, 6, 10,49,20,59,43,29,30,56,89,}  
+out: 89.
+package jintership;
+import java.util.*;
+
+/**
+ * @author RUKHSAR-JAMADAR
+ *
+ */
+public final class Algorithm {
+	
+
+	
+	    public static <T extends Object & Comparable<? super T>>
+	        T max(List<? extends T> list, int begin, int end) {
+
+	        T maxElem = list.get(begin);
+
+	        for (++begin; begin < end; ++begin)
+	            if (maxElem.compareTo(list.get(begin)) < 0)
+	                maxElem = list.get(begin);
+	        return maxElem;
+	    }
+	    public static void main(String args[])
+
+	    {
+	    	ArrayList<Integer>list=new ArrayList<Integer>();
+	    	list.add(2);
+	    	list.add(62);
+	    	list.add(4);
+	        list.add(78);  
+	        list.add(6);
+	    	list.add(10);
+	    	list.add(49);
+	    	list.add(59); 
+	    	list.add(43);
+	    	list.add(29);
+	    	list.add(30);
+	    	list.add(56);
+	    	list.add(89);
+	    	
+	    	System.out.println(Collections.max(list,null));
+	        
+	        
+	        
+	        
+	    }
+	    
+	    
+
+}
+output:
+89
+
+
+2.Write a generic method to count the number of elements in a collection that have a specific property (for example, odd integers, even number)
+i/p :{2 ,4 ,6 ,7, 8,9,90,78,41,56,79,45,65,85}
+ out put :
+ even :  7
+ odd :  7
+
+package jintership;
+import java.util.*;
+
+
+
+public final class Algorithm1 {
+	
+	public static <E> int mycount(Collection<E>c,UnaryPredicate<E>p)
+	{
+	  int count=0;
+	  for(E elem:c)
+	  {
+		  if(p.test(elem))
+		  {
+			  ++count;
+		  }
+	  }
+	  return count;
+	}
+	
+	
+}
+package jintership;
+
+public interface UnaryPredicate<E> {
+	public boolean test(E obj);
+
+}
+package jintership;
+import java.util.*;
+
+public class oddEvenpredicator implements UnaryPredicate<Integer> {
+	public boolean test(Integer i)
+	{
+	
+		return i%2 !=0;
+	}
+	
+	
+
+}
+package jintership;
+import java.util.*;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      Collection<Integer>ci=Arrays.asList(2 ,4 ,6 ,7, 8,9,90,78,41,56,79,45,65,85);
+     
+      int count=Algorithm1.mycount(ci, new oddEvenyPredicator());
+      System.out.println("number of odd integer:"+count);
+	}
+
+}
