@@ -1,0 +1,1088 @@
+Assignment  8 Thread and Multi thread
+
+Q1. In this challenge, simulate a banking system. Create the Account and Transaction classes.
+
+1. The Account class has a data member int balance, initially assigned to zero. The class should implement the following three methods:
+
+String deposit(int money) to add money to the balance. This method should return a string that describes the deposit transaction, i.e., "Depositing $money".
+String withdraw(int money) to subtract money from the balance. This method should return a string that describes the withdraw transaction, i.e., "Withdrawing $money". Note that, if there is insufficient balance to successfully withdraw the desired amount, then the balance should not be adjusted, and the returned string should be "Withdrawing $money (Insufficient Balance)".
+int getBalance() to return the account balance.
+class Account {
+    int balance=0;
+
+    public String deposit(int money){
+        balance += money;
+        return "Depositing $"+money;
+    }
+
+    public String withdraw(int money){
+        if(balance<money){
+            return "Withdraw $"+money+" (Insufficient Balance)";
+        } else{
+            balance -= money;
+            return "Withdraw $"+money;
+        }
+    }
+
+    public int getBalance(){
+        return balance;
+    }
+}
+2. The Transaction class has two data members Account account and List transactions. The class should implement the following three methods:
+class Transaction {
+    Account account = new Account();
+    List<String> transactions = new ArrayList<>();
+
+    public Transaction(Account account){
+        this.account = account;
+    }
+
+    public void deposit(int money){
+        transactions.add(account.deposit(money));
+    }
+
+    public void withdraw(int money){
+        transactions.add(account.withdraw(money));
+    }
+
+    public List<String> getTransaction(){
+        return transactions;
+    }
+}
+
+class TransactionRunnable implements Runnable {
+    private static final SecureRandom RANDOM_GENERATOR = new SecureRandom();
+    private final Transaction transaction;
+    private final int transactionsCount;
+    
+    public TransactionRunnable(Transaction transaction, int transactionsCount) {
+        this.transaction = transaction;
+        this.transactionsCount = transactionsCount;
+    }
+    
+   
+    public void run() {
+        for (int i = 0; i < this.transactionsCount; i++) {
+            int transactionType = RANDOM_GENERATOR.nextInt() % 2;
+            int money = RANDOM_GENERATOR.nextInt(100) + 1;
+
+            if (transactionType == 0) {
+                this.transaction.deposit(money);
+            } else {
+                this.transaction.withdraw(money);
+            }
+        }
+    }
+}
+public class bank {
+    private static final Scanner s= new Scanner(System.in);
+    private static final Account ACCOUNT = new Account();
+    private static final Transaction TRANSACTION = new Transaction(ACCOUNT);
+    
+    public static void main(String[] args) throws InterruptedException {
+        int threadsCount = Integer.parseInt(s.nextLine());
+        Thread[] t = new Thread[threadsCount];
+        
+        int expectedTransactionsCount = 0;
+        for (int i = 0; i < threadsCount; i++) {
+            int transactionsCount = Integer.parseInt(s.nextLine());
+            expectedTransactionsCount += transactionsCount;
+            
+            t[i] = new Thread(new TransactionRunnable(TRANSACTION, transactionsCount));
+        }
+        
+        for (int i = 0; i < threadsCount; i++) {
+            t[i].start();
+        }
+        
+        for (int i = 0; i < threadsCount; i++) {
+            t[i].join();
+        }
+        
+        List<String> transactions = TRANSACTION.getTransaction();
+        
+        if (transactions.size() != expectedTransactionsCount) {
+            System.out.println("Wrong Answer");
+        } else {
+            boolean correct = true;
+            for (String transaction: transactions) {
+                if (transaction == null) {
+                    correct = false;
+                    
+                    break;
+                }
+            }
+            
+            if (!correct) {
+                System.out.println("Wrong Answer");
+            } else {
+                int balance = ACCOUNT.getBalance();
+                
+                if (balance < 0) {
+                    System.out.println("Wrong Answer");
+                } else {
+                    for (String transaction: transactions) {
+                        System.out.println(transaction);
+                    }
+
+                    System.out.println("Balance $" + balance);
+                }
+            }
+        }
+    }
+}
+
+void deposit(int money) to invoke the deposit method in the Account class. This should add the transaction message to the transactions list.
+void withdraw(int money) to invoke the withdraw method in the Account class. This should add the transaction message to the transactions list.
+List getTransaction() to return the transactions.
+
+Q2. Write a program of producer and consumer
+import java.util.LinkedList;
+public class mycode
+{
+
+    public static void main(String[] args) 
+        throws InterruptedException 
+    { 
+        final Producer_consumer pc = new Producer_consumer(); 
+  
+ 
+        Thread t1 = new Thread(new Runnable() { 
+            
+            public void run() 
+            { 
+                try { 
+                    pc.produce(); 
+                } 
+                catch (InterruptedException e) { 
+                    e.printStackTrace(); 
+                } 
+            } 
+        }); 
+  
+        
+        Thread t2 = new Thread(new Runnable() { 
+            
+            public void run() 
+            { 
+                try { 
+                    pc.consume(); 
+                } 
+                catch (InterruptedException e) { 
+                    e.printStackTrace(); 
+                } 
+            } 
+        }); 
+  
+        // Start both threads 
+        t1.start(); 
+        t2.start(); 
+  
+        // t1 finishes before t2 
+        t1.join(); 
+        t2.join(); 
+    } 
+  
+    
+    public static class Producer_consumer { 
+  
+        LinkedList<Integer> list = new LinkedList<>(); 
+        int capacity = 2; 
+  
+        public void produce() throws InterruptedException 
+        { 
+            int value = 0; 
+            while (true) { 
+                synchronized (this) 
+                { 
+                  
+                    while (list.size() == capacity) 
+                        wait(); 
+  
+                    System.out.println("Producer produced-"
+                                       + value); 
+  
+                    list.add(value++); 
+
+                    notify(); 
+  
+              
+                    Thread.sleep(1000); 
+                } 
+            } 
+        } 
+ 
+        public void consume() throws InterruptedException 
+        { 
+            while (true) { 
+                synchronized (this) 
+                { 
+                    
+                    while (list.size() == 0) 
+                        wait(); 
+ 
+                    int val = list.removeFirst(); 
+  
+                    System.out.println("Consumer consumed-"
+                                       + val); 
+  
+               
+                    notify(); 
+  
+                    Thread.sleep(1000); 
+                } 
+            } 
+        } 
+    } 
+}
+
+
+Q3. Write a program of thread to used all the method of thread like (wait, sleep, notify, notifyall,join,getname, currentthreade islive?, priority ).
+you have to write on sigle program to used this all.
+import java.lang.*; 
+  
+public class MyThread implements Runnable 
+{ 
+   
+   
+   Thread t=new Thread();
+    public void run() 
+    { 
+        System.out.println("Thread priority"+t.getPriority());
+        for (int i = 0; i < 4; i++) 
+        { 
+            System.out.println(t.currentThread().getName() 
+                                                   + "  " + i); 
+         
+            Thread.yield();
+            try
+            { 
+   
+                t.sleep(1000); 
+            } 
+  
+            catch (Exception e) 
+            { 
+                System.out.println(e); 
+            } 
+            System.out.println("Current thread: "+t.currentThread() + t.getName()); 
+            System.out.println("Is Alive? "
+                               + t.isAlive());
+        } 
+
+    
+    } 
+   public static void main(String[] args) throws Exception 
+    { 
+        Thread t = new Thread(new MyThread()); 
+  
+        // call run() function 
+        t.start(); 
+       Thread t2= new Thread(new MyThread()); 
+      t.join();
+        // call run() function 
+        t2.start(); 
+
+        
+    } 
+}
+output:
+D:\jinter>java MyThread
+Thread priority5
+Thread-1  0
+Current thread: Thread[Thread-1,5,main]Thread-0
+Is Alive? false
+Thread-1  1
+Current thread: Thread[Thread-1,5,main]Thread-0
+Is Alive? false
+Thread-1  2
+Current thread: Thread[Thread-1,5,main]Thread-0
+Is Alive? false
+Thread-1  3
+Current thread: Thread[Thread-1,5,main]Thread-0
+Is Alive? false
+Thread priority5
+Thread-3  0
+Current thread: Thread[Thread-3,5,main]Thread-2
+Is Alive? false
+Thread-3  1
+Current thread: Thread[Thread-3,5,main]Thread-2
+Is Alive? false
+Thread-3  2
+Current thread: Thread[Thread-3,5,main]Thread-2
+Is Alive? false
+Thread-3  3
+Current thread: Thread[Thread-3,5,main]Thread-2
+Is Alive? false
+
+
+Q4. You are required to compute the power of a number by implementing a calculator. Create a class MyCalculator which consists of a single method long power(int, int). This method takes two integers, n and p, as parameters and finds . If either p  or n is negative, then the method must throw an exception which says "n and p should not be negative". Also, if both  and  are zero, then the method must throw an exception which says "n and p should not be zero"
+For example, -4 and -5 would result in java.lang.Exception: n or p should not be negative.
+Complete the function power in class MyCalculator and return the appropriate result after the power operation or an appropriate exception as detailed above.
+import java.util.*;
+class MyCalculator
+{
+public static long power(int n,int p)throws Exception
+{
+if(p<n ||p<0)
+{
+throw new Exception("n or p should not be negative");
+}
+else if(n==0 || p==0)
+{
+throw new Exception("n or p should not be zero");
+}
+else 
+{
+return((long)Math.pow(n,p));
+}
+}
+}
+ 
+public class MyCalMain
+{
+public static final MyCalculator m=new MyCalculator();
+public static final Scanner s=new Scanner(System.in);
+public static void main(String args[])
+{
+try
+{
+while(s.hasNextInt())
+{
+int n=s.nextInt();
+int p=s.nextInt();
+System.out.println(m.power(n,p));
+}
+}
+catch(Exception e)
+{
+System.out.println(e);
+}
+}
+}
+output:
+D:\jinter>javac MyCalMain.java
+
+D:\jinter>java MyCalMain
+0
+0
+java.lang.Exception: n or p should not be zero
+
+D:\jinter>javac MyCalMain.java
+
+D:\jinter>java MyCalMain
+-1
+-2
+java.lang.Exception: n or p should not be negative
+
+
+Q5.Java Program Showing Execution of Multiple Tasks with a Single Thread
+class Thread5 extends Thread
+{
+public void run()
+{
+System.out.println("task 1");
+for(int i=0;i<=4;i++)
+{
+System.out.println(i);
+}
+System.out.println("task 2");
+for(int i=4;i>=0;i--)
+{
+System.out.println(i);
+}
+System.out.println("task 3");
+for(int i=7;i<=14;i++)
+{
+System.out.println(i);
+}
+}
+}
+public class Threadmain
+{
+public static void main(String args[])
+{
+Thread5 t1=new Thread5();
+t1.start();
+}
+}
+output:
+D:\jinter>java Threadmain
+task 1
+0
+1
+2
+3
+4
+task 2
+4
+3
+2
+1
+0
+task 3
+7
+8
+9
+10
+11
+12
+13
+14
+Q6.Java Program Showing Two Threads Working Simultaneously Upon Two Objects
+class MyThread2 extends Thread
+{
+public void run()
+{
+for(int i=0;i<2;i++)
+{
+System.out.println(i);
+}
+}
+}
+class MyThread3 extends Thread
+{
+public void run()
+{
+System.out.println("Task 2");
+}
+
+}
+public class mymain
+{
+public static void main(String args[])
+{
+MyThread2 m1=new MyThread2();
+m1.start();
+MyThread3 m2=new MyThread3();
+m2.start();
+}
+}
+output:
+D:\jinter>javac mymain.java
+
+D:\jinter>java mymain
+0
+1
+Task 2
+
+Q7.Java Program Showing Two Threads Acting Upon a Single Object
+class MyThread2 extends Thread
+{
+public void run()
+{
+for(int i=0;i<2;i++)
+{
+System.out.println(i);
+}
+}
+}
+
+public class mymain
+{
+public static void main(String args[])
+{
+MyThread2 m1=new MyThread2();
+m1.start();
+MyThread2 m2=new MyThread2();
+m2.start();
+}
+}
+output:
+D:\jinter>javac mymain.java
+
+D:\jinter>java mymain
+0
+1
+0
+1
+
+Q8.Java Program with 2 Threads Which Prints Alternatively
+public class MyThread3
+{
+static int count=0;
+public static void main(String args[])throws InterruptedException
+{
+final Object lock=new Object();
+Thread t1=new Thread (new Runnable(){
+public void run()
+{
+for(int i=0;i<6;i++)
+{
+synchronized(lock)
+{
+count++;
+System.out.println(i);
+try
+{
+lock.wait();
+lock.notify();
+}
+catch(InterruptedException e)
+{
+System.out.println(e);
+}
+}
+
+}
+}
+});
+Thread t2=new Thread (new Runnable(){
+public void run()
+{
+for(int i=0;i<6;i++)
+{
+synchronized(lock)
+{
+count++;
+System.out.println(i);
+try
+{
+lock.wait();
+lock.notify();
+}
+catch(InterruptedException e)
+{
+System.out.println(e);
+}
+}
+
+}
+}
+});
+t1.start();
+t2.start();
+t1.join();
+t2.join();
+}
+}
+Q9.Java Program to Start One Thread More than Once
+public class demo extends Thread
+{
+public void run()
+{
+System.out.println("hello");
+}
+public static void main(String args[])
+{
+demo d1=new demo();
+new Thread(d1).start();
+
+new Thread(d1).start();
+}
+}
+output:
+D:\jinter>javac demo.java
+
+D:\jinter>java demo
+hello
+hello
+
+Q10.Java Program to Check CurrentThread in Multi Threading Concept
+class demo1 extends Thread
+{
+public void run()
+{
+System.out.println("hello");
+}
+}
+ class demo2 extends Thread
+{
+public void run()
+{
+System.out.println("hii");
+}
+}
+public class demo
+{
+public static void main(String args[])
+{
+
+demo1 d1=new demo1();
+demo2 d2=new demo2();
+Thread t1=new Thread(d1);
+System.out.println(t1.currentThread()+t1.getName());
+t1.start();
+Thread t2=new Thread(d2);
+System.out.println(t2.currentThread()+t2.getName());
+
+t2.start();
+
+
+}
+}
+output:L
+D:\jinter>javac demo.java
+
+D:\jinter>java demo
+Thread[main,5,main]Thread-2
+Thread[main,5,main]Thread-3
+hello
+hii
+
+Q11.Java Program to Create a Server with 2 Threads to Communicate with Serveral Clients
+import java.io.*;
+import java.util.*;
+import java.net.*;
+public class Myserver
+{
+static Vector<ClientHandler>v=new Vector<>();
+static int i=0;
+public static void main(String args[])throws IOException
+{
+ServerSocket ss=new ServerSocket(1234);
+Socket s;
+while(true)
+{
+s=ss.accept();
+System.out.println("New Client request resived"+s);
+DataInputStream di=new DataInputStream(s.getInputStream());
+DataOutputStream dos=new DataOutputStream(s.getOutputStream());
+System.out.println("Creating new handler for this client...");
+ClientHandler  ch=new ClientHandler(s,"client"+i,di,dos);
+Thread t=new Thread(ch);
+System.out.println("Adding this client to active client list");
+v.add(ch);
+t.start();
+i++;
+
+}
+}
+}
+
+class ClientHandler implements Runnable
+{
+Scanner s=new Scanner(System.in);
+private String name;
+final DataInputStream di;
+final DataOutputStream dos;
+Socket s;
+boolean isloggedin;
+public ClientHandler(Socket s,String name,DataInputStream di,DataOutputStream dos)
+{
+this.s=s;
+this.name=name;
+this.di=di;
+this.dos=dos;
+this.isloggedin=true;
+
+}
+public void run()
+{
+String received;
+while(true)
+{
+try{
+if(received.equals("logout"))
+{
+this.isloggedin=false;
+this.s=close();
+break;
+}
+StringTokenizer st=new StringTokenizer (received,"#");
+String send=st.nextToken();
+String rec=st.nexToken();
+for(ClientHandler c:Myserver.v)
+{
+if(c.name.equals(rec)&&c.isloggedin==true)
+{
+c.dos.writeUTF(this.name+":"+send);
+break;
+}
+}
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+try
+{
+this.di.close();
+this.dos.close();
+}
+catch(IOException e)
+{
+System.out.println(e);
+}
+}
+}
+}
+Q12.Java Program to Create a Client That Receive Message From the Server
+import java.io.*; 
+import java.net.*; 
+  
+class MyServer1{ 
+  
+    public static void main(String args[]) 
+        throws Exception 
+    { 
+  
+        // Create server Socket 
+        ServerSocket ss = new ServerSocket(888); 
+  
+        // connect it to client socket 
+        Socket s = ss.accept(); 
+        System.out.println("Connection established"); 
+  
+        // to send data to the client 
+        PrintStream ps 
+            = new PrintStream(s.getOutputStream()); 
+  
+        // to read data coming from the client 
+        BufferedReader br 
+            = new BufferedReader( 
+                new InputStreamReader( 
+                    s.getInputStream())); 
+  
+        // to read data from the keyboard 
+        BufferedReader kb 
+            = new BufferedReader( 
+                new InputStreamReader(System.in)); 
+  
+        // server executes continuously 
+        while (true) { 
+  
+            String str, str1; 
+  
+            // repeat as long as the client 
+            // does not send a null string 
+  
+            // read from client 
+            while ((str = br.readLine()) != null) { 
+                System.out.println(str); 
+                str1 = kb.readLine(); 
+  
+                // send to client 
+                ps.println(str1); 
+            } 
+  
+            // close connection 
+            ps.close(); 
+            br.close(); 
+            kb.close(); 
+            ss.close(); 
+            s.close(); 
+  
+            // terminate application 
+            System.exit(0); 
+  
+        } // end of while 
+    } 
+} 
+import java.io.*; 
+import java.net.*; 
+  
+class MyClient { 
+  
+    public static void main(String args[]) 
+        throws Exception 
+    { 
+  
+        // Create client socket 
+        Socket s = new Socket("localhost", 888); 
+  
+        // to send data to the server 
+        DataOutputStream dos 
+            = new DataOutputStream( 
+                s.getOutputStream()); 
+  
+        // to read data coming from the server 
+        BufferedReader br 
+            = new BufferedReader( 
+                new InputStreamReader( 
+                    s.getInputStream())); 
+  
+        // to read data from the keyboard 
+        BufferedReader kb 
+            = new BufferedReader( 
+                new InputStreamReader(System.in)); 
+        String str, str1; 
+  
+        // repeat as long as exit 
+        // is not typed at client 
+        while (!(str = kb.readLine()).equals("exit")) { 
+  
+            // send to the server 
+            dos.writeBytes(str + "\n"); 
+  
+            // receive from the server 
+            str1 = br.readLine(); 
+  
+            System.out.println(str1); 
+        } 
+  
+        // close connection. 
+        dos.close(); 
+        br.close(); 
+        kb.close(); 
+        s.close(); 
+    } 
+} 
+
+output:
+D:\jinter>java MyServer1
+Connection established
+hiiii
+D:\jinter>java MyClient
+hiiii
+hellohe
+Q13.Java Program of a Multithreaded Implementation of Any Parallelized Divide-Conquer Algorithm
+import java.util.*;
+public class ParallelMergeSorter extends Thread 
+{
+  public static <E> void sort(E[] a, Comparator<? super E> comp, int threads) {
+        parallelMergeSort(a, 0, a.length-1, comp, threads);
+    }
+
+ private static <E> void mergeSort(E[] a, int from, int to,
+            Comparator<? super E> comp) {
+        if (from == to) {
+            return;
+        }
+        if (to - from >0) {
+            int mid = (from + to) / 2;
+            mergeSort(a, from, mid, comp);
+            mergeSort(a, mid + 1, to, comp);
+            merge(a, from, mid, to, comp);
+        }
+    }
+   
+private static <E> void parallelMergeSort(E[] a, int from, int to, Comparator<? super E> comp, int availableThreads){
+        if (to - from > 0){
+            if (availableThreads <=1) {
+                mergeSort(a, from, to, comp);
+            }
+            else {
+                int middle = to/2;
+            
+                Thread firstHalf = new Thread(){
+                    public void run(){
+                        parallelMergeSort(a, from, middle, comp, availableThreads - 1);
+                    }
+                };
+                Thread secondHalf = new Thread(){
+                    public void run(){
+                        parallelMergeSort(a, middle + 1, to, comp, availableThreads - 1);
+                    }
+                };
+            
+                firstHalf.start();
+                secondHalf.start();
+			
+                try {
+                    firstHalf.join();
+                    secondHalf.join();
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
+            
+                merge(a, from, middle, to, comp);
+            }
+        }
+    }
+ private static <E> void merge(E[] a, int from, int mid, int to, Comparator<? super E> comp) {
+        int n = to - from + 1;
+         // Size of the range to be merged
+
+        // Merge both halves into a temporary array b
+        Object[] b = new Object[n];
+
+        int i1 = from;
+        // Next element to consider in the first range
+        int i2 = mid + 1;
+        // Next element to consider in the second range
+        int j = 0;
+         // Next open position in b
+
+        // As long as neither i1 nor i2 past the end, move
+        // the smaller element into b
+        while (i1 <= mid && i2 <= to) {
+            if (comp.compare(a[i1], a[i2]) < 0) {
+                b[j] = a[i1];
+                i1++;
+            } else {
+                b[j] = a[i2];
+                i2++;
+            }
+            j++;
+        }
+
+      
+          while (i1 <= mid) {
+            b[j] = a[i1];
+            i1++;
+            j++;
+        }
+
+     
+        while (i2 <= to) {
+            b[j] = a[i2];
+            i2++;
+            j++;
+        }
+
+        
+        for (j = 0; j < n; j++) {
+            a[from + j] = (E) b[j];
+        }
+    }
+}
+ 
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Random;
+
+
+public class ParallelSortTester {
+
+    public static void main(String[] args) {
+        runSortTester();
+    }
+
+   
+    public static void runSortTester() {
+        int SIZE = 1000,   // initial length of array to sort
+            ROUNDS = 15,
+            availableThreads = (Runtime.getRuntime().availableProcessors())*2;
+
+        Integer[] a;
+
+        Comparator<Integer> comp = new Comparator<Integer>() {
+            public int compare(Integer d1, Integer d2) {
+                return d1.compareTo(d2);
+            }
+        };
+
+        System.out.printf("\nMax number of threads == %d\n\n", availableThreads);
+        for (int i = 1; i <= availableThreads; i*=2) {
+            if (i == 1) {
+                System.out.printf("%d Thread:\n", i);
+            }
+            else {
+                System.out.printf("%d Threads:\n", i);
+            }
+            for (int j = 0, k = SIZE; j < ROUNDS; ++j, k*=2) {
+                a = createRandomArray(k);
+               
+                long startTime = System.currentTimeMillis();
+                ParallelMergeSorter.sort(a, comp, availableThreads);
+                long endTime = System.currentTimeMillis();
+
+                if (!isSorted(a, comp)) {
+                    throw new RuntimeException("not sorted afterward: " + Arrays.toString(a));
+                }
+
+                System.out.printf("%10d elements  =>  %6d ms \n", k, endTime - startTime);
+            }
+            System.out.print("\n");
+        }
+    }
+
+   
+    public static <E> boolean isSorted(E[] a, Comparator<? super E> comp) {
+        for (int i = 0; i < a.length - 1; i++) {
+            if (comp.compare(a[i], a[i + 1]) > 0) {
+                System.out.println(a[i] + " > " + a[i + 1]);
+                return false;
+            }
+        }
+        return true;
+    }
+    public static <E> void shuffle(E[] a) {
+        for (int i = 0; i < a.length; i++) {
+            // move element i to a random index in [i .. length-1]
+            int randomIndex = (int) (Math.random() * a.length - i);
+            swap(a, i, i + randomIndex);
+        }
+    }
+    public static final <E> void swap(E[] a, int i, int j) {
+        if (i != j) {
+            E temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+    }
+
+    public static Integer[] createRandomArray(int length) {
+        Integer[] a = new Integer[length];
+        Random rand = new Random(System.currentTimeMillis());
+        for (int i = 0; i < a.length; i++) {
+            a[i] = rand.nextInt(1000000);
+        }
+        return a;
+    }
+}
+D:\jinter>java ParallelSortTester
+
+Max number of threads == 8
+
+1 Thread:
+      1000 elements  =>      13 ms
+      2000 elements  =>      16 ms
+      4000 elements  =>      17 ms
+      8000 elements  =>      20 ms
+     16000 elements  =>      55 ms
+     32000 elements  =>      73 ms
+     64000 elements  =>      45 ms
+    128000 elements  =>      44 ms
+    256000 elements  =>      81 ms
+    512000 elements  =>     141 ms
+   1024000 elements  =>     654 ms
+   2048000 elements  =>    1396 ms
+   4096000 elements  =>    3020 ms
+   8192000 elements  =>    6322 ms
+  16384000 elements  =>   12252 ms
+
+2 Threads:
+      1000 elements  =>      45 ms
+      2000 elements  =>       6 ms
+      4000 elements  =>       7 ms
+      8000 elements  =>       8 ms
+     16000 elements  =>       9 ms
+     32000 elements  =>      13 ms
+     64000 elements  =>      41 ms
+    128000 elements  =>      28 ms
+    256000 elements  =>      63 ms
+    512000 elements  =>     137 ms
+   1024000 elements  =>     300 ms
+   2048000 elements  =>     696 ms
+   4096000 elements  =>    1569 ms
+   8192000 elements  =>    6910 ms
+  16384000 elements  =>    8321 ms
+
+4 Threads:
+      1000 elements  =>      47 ms
+      2000 elements  =>       4 ms
+      4000 elements  =>       7 ms
+      8000 elements  =>       8 ms
+     16000 elements  =>       8 ms
+     32000 elements  =>      10 ms
+     64000 elements  =>      17 ms
+    128000 elements  =>      67 ms
+    256000 elements  =>      55 ms
+    512000 elements  =>     151 ms
+   1024000 elements  =>     310 ms
+   2048000 elements  =>     716 ms
+   4096000 elements  =>    1545 ms
+   8192000 elements  =>    6485 ms
+  16384000 elements  =>   13893 ms
+
+8 Threads:
+      1000 elements  =>      45 ms
+      2000 elements  =>       5 ms
+      4000 elements  =>       6 ms
+      8000 elements  =>       8 ms
+     16000 elements  =>       7 ms
+     32000 elements  =>      10 ms
+     64000 elements  =>      17 ms
+    128000 elements  =>      66 ms
+    256000 elements  =>      62 ms
+    512000 elements  =>     140 ms
+   1024000 elements  =>     335 ms
+   2048000 elements  =>     596 ms
+   4096000 elements  =>    1759 ms
+   8192000 elements  =>    6820 ms
+  16384000 elements  =>   13604
+
+

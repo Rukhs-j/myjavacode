@@ -1,0 +1,82 @@
+Assignment 9: JBCD
+Make a new file read.txt
+add a data of student assigned as
+name,rollnuber,marks,percentage.
+tom,101,500,95%
+
+of 10 student.
+Read a txt file.
+Make a database connection and store the data in student table with attribute
+id int
+name varchar(30),
+age int(10),
+address varchar
+import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.io.*;
+import java.util.*;
+//Database: db_test »Table: db_table1
+public class mycode
+{
+
+public static void main(String[] args)throws Exception
+{
+String id;
+String name;
+String age;
+String address;
+PreparedStatement ps = null;
+ BufferedReader br = new BufferedReader(new FileReader("D:\\myfolder\\student_data.txt"));
+ String url="jdbc:mysql://localhost:3307/db_test";
+ String uname="root";
+String pass="";
+String query="SELECT * FROM `db_table` WHERE 1";
+Class.forName("com.mysql.jdbc.Driver");
+Connection con=DriverManager.getConnection(url,uname,pass);
+System.out.println("Created....");
+String line = null;
+ while ((line = br.readLine()) != null)
+        {
+            String tmp[] = line.split(",");
+            id = tmp[0];
+            name= tmp[1];
+            age = tmp[2];
+            address=tmp[3];
+
+            System.out.println(id+ "\t" + name + "\t" + age + "\t" + address);
+            String sql =
+           "INSERT INTO `db_table1` (`id`, `name`, `age`,`address`) VALUES (?,?,?,);";
+
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        }
+
+/*Statement st=con.createStatement();
+ ResultSet rs=st.executeQuery(query);
+ rs.next();
+String n=rs.getString("name");//add other element of the database table like age, address and pring it .
+System.out.println(n); 
+String a=rs.getString("address");
+System.out.println(a);
+int a2=rs.getInt("age");
+System.out.println(a2);
+ st.close();*/
+br.close();
+ps.close();
+con.close();   
+ 
+}
+
+}
+/*output:
+D:\myfolder>javac -cp com.mysql.jdbc_5.1.5.jar;. mycode.java
+
+D:\myfolder>java -cp com.mysql.jdbc_5.1.5.jar;. mycode
+Created....
+1       rukhsar 20      latur*/
+
+
+
+
