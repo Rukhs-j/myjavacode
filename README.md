@@ -1,2 +1,2 @@
 # myjavacode 
-Hui,In this repository I uploaded some java basic program 
+Hii,In this repository I uploaded some java basic program 
